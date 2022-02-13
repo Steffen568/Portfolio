@@ -8,6 +8,7 @@
 body {
     background-color: var(--darkViolet);
     margin: 40px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
    
 }
 
@@ -58,6 +59,9 @@ section {
     display: flex;
     padding: 0 4em;
     margin-right: 40px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
     
 }
 
@@ -72,7 +76,11 @@ section {
 .card {
     transform-style: preserve-3d;
     height: 100%;
-    width: 100%
+    width: 100%;
+    display: flex;
+    margin: 0 30px 40px 30px;
+    justify-content: center;
+    transition: 0.5s ease;
 }
 
 .front, .back {
@@ -120,6 +128,6 @@ section {
     transform: rotateX(180deg);
 }
 
-.container:hover .card {
+.card:hover {
     transform: rotateX(180deg);
 }

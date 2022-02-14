@@ -7,18 +7,27 @@
 
 body {
     background-color: var(--darkViolet);
-    margin: 40px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-   
+    color: var(--mainText);
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+.grid {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 0.5fr 3fr 2fr 0.5fr;
+    grid-template-areas: 
+    "grid-header grid-header grid-nav grid-nav";
+
 }
 
 /* header and nav */
 header {
     color: var(--mainText);
     border: var(--mainText) solid 5px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;   
+      
 }
 
 header h1 {
@@ -27,8 +36,7 @@ header h1 {
 
 .nav ul {
     list-style:  none;
-    display: flex;
-    flex-direction: row;
+    
 }
 
 .link {
@@ -49,7 +57,84 @@ header h1 {
     color: #fff;
 }
 
-/* hero */ 
+/* about me */
+
+.aboutMe {
+
+    padding: 20px;
+    margin: 10px;
+}
+
+.aboutMe h2 {
+    padding-right: 20px;
+}
+
+.aboutMe p {
+    border-left: 2px solid var(--mainText);
+    padding-left: 20px;
+}
 
 /* flip card content */ 
+.ex1 {
+    height: 350px;
+    width: 65%;
+    border: 1px solid var(--mainText);
+    margin-left: 150px ;
+    margin-bottom: 40px;
+    background-image: url(../images/ex1.jpg);
+    background-size: cover;
+
+}
+
+.ex1:hover {
+    cursor: pointer;
+    opacity: 65%;
+}
+
+.ex2-5 {
+   
+    
+}
+
+.container:hover {
+    cursor: pointer;
+    opacity: 50%;
+}
+
+.container {
+    border: 1px solid  var(--mainText);
+}
+
+#ex2 {
+    background-image: url(../images/ex2.jpg);
+    background-size: cover;
+}
+
+#ex3 {
+    background-image: url(../images/ex3.jpg);
+    background-size: cover;
+}
+
+#ex4 {
+    background-image: url(../images/ex4.jpg);
+    background-size: cover;
+}
+
+#ex5 {
+    background-image: url(../images/ex5.jpg);
+    background-size: cover;
+}
+
+ 
+@media screen and (max-width: 760px) {
+    .ex2-5, .ex1 {
+        display: grid;
+        grid-template-columns: 1fr;
+
+    }
+
+    
+    
+}
+
 

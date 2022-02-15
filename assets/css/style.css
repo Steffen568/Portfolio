@@ -1,140 +1,103 @@
-/* css for portfolio */
-
-:root {
-    --mainText: #f84378;
-    --darkViolet: #141027;
+/* temp colors */
+#grid-headre{
+    background-color: gray;
 }
 
-body {
-    background-color: var(--darkViolet);
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: var(--mainText);
-    margin-left: 150px;
-    margin-right: 150px;
+#grid-nav {
+    background-color: blueviolet;
 }
 
-.grid {
-    display: grid;
-    height: 100vh;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 0.5fr 3fr 2fr 0.5fr;
-    grid-template-areas: 
-    "grid-header grid-header grid-nav grid-nav";
-
+#grid-side-bar {
+    background-color: gray;
 }
 
-/* header and nav */
-header {
-    color: var(--mainText);
-    border: var(--mainText) solid 5px;
-      
-}
-
-header h1 {
-    margin-left: 30px;
-}
-
-.nav ul {
-    list-style:  none;
-    
-}
-
-.link {
-    margin-right: 40px;
-    color: var(--mainText);
-    height: 3rem;
-    width: 3rem;
-    border: 1px solid var(--mainText);
-    border-radius: 50%;
-}
-
-.link i {
-    margin: auto;
-}
-
-.link:hover {
-    background-image: linear-gradient(to right, #f73f73, #3a1332);
-    color: #fff;
-}
-
-/* about me */
-
-.aboutMe {
-
-    padding: 20px;
-    margin: 10px;
-}
-
-.aboutMe h2 {
-    padding-right: 20px;
-}
-
-.aboutMe p {
-    border-left: 2px solid var(--mainText);
-    padding-left: 20px;
-}
-
-/* flip card content */ 
-.ex1 {
-    height: 350px;
-    width: 65%;
-    border: 1px solid var(--mainText);
-    margin-left: 150px ;
-    margin-bottom: 40px;
-    background-image: url(../images/ex1.jpg);
-    background-size: cover;
-
-}
-
-.ex1:hover {
-    cursor: pointer;
-    opacity: 65%;
-}
-
-.ex2-5 {
-   
-    
-}
-
-.container:hover {
-    cursor: pointer;
-    opacity: 50%;
-}
-
-.container {
-    border: 1px solid  var(--mainText);
+#ex1 {
+    background-color: aquamarine;
 }
 
 #ex2 {
-    background-image: url(../images/ex2.jpg);
-    background-size: cover;
+    background-color: black;
 }
 
 #ex3 {
-    background-image: url(../images/ex3.jpg);
-    background-size: cover;
+    background-color: gray;
 }
 
 #ex4 {
-    background-image: url(../images/ex4.jpg);
-    background-size: cover;
+    background-color: blue;
 }
 
 #ex5 {
-    background-image: url(../images/ex5.jpg);
-    background-size: cover;
+    background-color: cadetblue;
 }
 
- 
-@media screen and (max-width: 760px) {
-    .ex2-5, .ex1 {
-        display: grid;
+#grid-footer {
+    background-color: gray;
+}
+
+/* temp colors */
+
+/* grid structure */
+.grid {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 0.5fr 1fr 1fr 1fr;
+    grid-template-rows: 0.2fr 1.5fr 1.3fr 0.2fr;
+    grid-template-areas: 
+    "grid-header grid-header grid-nav grid-nav"
+    "side-bar ex1 ex1 ex1"
+    "side-bar ex2 ex3 ex4"
+    "side-bar grid-footer grid-footer grid-footer";
+
+}
+
+.header {
+    grid-area: grid-header;
+}
+
+.nav { 
+    grid-area: grid-nav;
+}
+
+.side-bar {
+    grid-area: side-bar;
+}
+
+#ex1 {
+    grid-area: ex1;
+}
+
+#ex2 {
+    grid-area: ex2;
+}
+
+#ex3 {
+    grid-area: ex3;
+}
+
+#ex4 {
+    grid-area: ex4;
+}
+
+.footer {
+    grid-area: grid-footer;
+}
+
+/* grid structure -end */
+
+/* media queries */
+@media screen and (max-width: 780px) {
+    .grid {
         grid-template-columns: 1fr;
-
+        grid-template-rows: 0.4fr 0.4fr 0.6fr 2fr  1.2fr 1.2fr 1.2fr 0.4fr;
+        grid-template-areas: 
+        "grid-header"
+        "grid-nav"
+        "side-bar"
+        "ex1"
+        "ex2"
+        "ex3"
+        "ex4"
+        "grid-footer";
     }
-
-    
-    
 }
-
-

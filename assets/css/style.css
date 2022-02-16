@@ -1,26 +1,23 @@
-/* temp colors */
 
-
-#grid-footer {
-    background-color: gray;
-}
-
-/* temp colors */
 
 /* grid structure */
 .grid {
-    margin: 75px 100px 75px 100px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: black;
+    color: orange;
+    margin: 10rem 25rem 10rem 25rem;
     display: grid;
     grid-gap: 2rem 1rem;
     height: 100vh;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 0.2fr 0.9fr 0.5fr 0.2fr 0.2fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: .5fr 40fr 25fr 10fr 3fr .5fr;
     grid-template-areas: 
-    "grid-header grid-header grid-nav"
-    "ex1 ex1 ex1"
-    "ex2 ex3 ex4"
-    "grid-contacts grid-contacts grid-contacts"
-    "grid-footer grid-footer grid-footer";
+    "grid-header grid-nav"
+    "ex1 ex1"
+    "ex2 ex3"
+    "ex4 ex5"
+    "content content"
+    "grid-contacts grid-contacts";
 
 }
 
@@ -52,8 +49,20 @@
     grid-area: ex4;
 }
 
+#ex5 {
+    grid-area: ex5;
+}
+
 .footer {
     grid-area: grid-footer;
+}
+
+.content {
+    grid-area: content;
+}
+
+#grid-contacts {
+    grid-area: grid-contacts;
 }
 
 /* grid structure -end */
@@ -61,8 +70,9 @@
 /* media queries */
 @media screen and (max-width: 780px) {
     .grid {
+        margin: 25px;
         grid-template-columns: 1fr;
-        grid-template-rows: 0.4fr 0.4fr 2fr  1.2fr 1.2fr 1.2fr 0.4 fr 0.4fr;
+        grid-template-rows: 0.4fr 0.4fr 2fr  1.2fr 1.2fr 1.2fr 1.2fr 2fr 0.4 fr;
         gap: .5rem;
         grid-template-areas: 
         "grid-header"
@@ -71,10 +81,13 @@
         "ex2"
         "ex3"
         "ex4"
-        "grid-contacts"
-        "grid-footer";
+        "ex5"
+        "content"
+        "grid-contacts";
     }
 }
+
+
 
 /* header and nav */
 
@@ -96,6 +109,7 @@
     list-style: none;
     justify-content: space-evenly;
     margin-top: 50px;
+    font-size: 25px;
 }
 
 .link {
@@ -118,49 +132,79 @@
     opacity: 100%;
 }
 
-#ex1 {
-    background-image: url(../images/ex1.jpg);
+.content-panel {
     background-size: cover;
-    opacity: 85%;
+    opacity: 65%;
     border: 4px solid orange;
+    background-position: center;
 }
 
-#ex1:hover {
+.content-panel:hover {
     opacity: 1;
 }
+
+#ex1 {
+    background-image: url(../images/ex1.jpg);
+}
+
+
 
 #ex2 {
     background-image: url(../images/ex2.jpg);
-    background-size: cover;
-    opacity: 85%;
-    border: 4px solid orange;
 }
 
-#ex2:hover {
-    opacity: 1;
-}
+
 
 #ex3 {
     background-image: url(../images/ex3.jpg);
-    background-size: cover;
-    opacity: 85%;
-    border: 4px solid orange;
 }
 
-#ex3:hover {
-    opacity: 1;
-}
+
 
 #ex4 {
     background-image: url(../images/runbuddy.jpg);
-    background-size: cover;
-    opacity: 85%;
-    border: 4px solid orange;
 }
 
-#ex4:hover {
+
+
+#ex5 {
+    background-image: url(../images/ex5.jpg);
+}
+
+
+
+/* example text */ 
+
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    text-align: center;
+    align-content: stretch;
+}
+
+.example-text {
+    border: 1px solid orange;
+    padding: 10px;
+}
+
+.label {
+    height: 35px;
+    width: 120px;
+    border: 1px solid orange;
+    background-color:  gray;
     opacity: 1;
 }
+
+/* contacts */
+
+.contacts {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
 
 
 

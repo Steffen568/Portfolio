@@ -65,6 +65,7 @@
     grid-area: grid-contacts;
 }
 
+
 /* grid structure -end */
 
 /* media queries */
@@ -72,9 +73,9 @@
     .grid {
         margin: 25px;
         grid-template-columns: 1fr;
-        grid-template-rows: 0.4fr 0.4fr 2fr  1.2fr 1.2fr 1.2fr 1.2fr 2fr 0.4 fr;
+        grid-template-rows: 0.4fr 0.4fr 2fr  1.2fr 1.2fr 1.2fr 1.2fr 2fr 0.4fr;
         gap: .5rem;
-        grid-template-areas: 
+        grid-template-areas:
         "grid-header"
         "grid-nav"
         "ex1"
@@ -82,6 +83,7 @@
         "ex3"
         "ex4"
         "ex5"
+        "example-text1"
         "content"
         "grid-contacts";
     }
@@ -93,7 +95,7 @@
 
 .header {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     padding: 15px;
     
 }
@@ -117,8 +119,7 @@
     color: orange ;
     height: 6rem;
     width: 6rem;
-    border: 1px solid orange;
-    border-radius: 50%;
+    
 }
 
 /* content */
@@ -187,6 +188,7 @@
 .example-text {
     border: 1px solid orange;
     padding: 10px;
+    justify-content: space-between;
 }
 
 .label {

@@ -40,7 +40,7 @@ test('loads and every button click is error-free', async ({ page }) => {
 test('opens from file:// with zero console errors', async ({ page }) => {
   const errors = trackErrors(page);
   await page.goto(pathToFileURL(join(process.cwd(), 'index.html')).href);
-  await expect(page.locator('.hd-name')).toHaveText('STEFFEN [LAST NAME]');
+  await expect(page.locator('.hd-name')).toHaveText('STEFFEN GONZALEZ');
   await clickEverything(page);
   expect(errors).toEqual([]);
 });
@@ -92,17 +92,17 @@ test('header and footer copy match the design word for word', async ({ page }) =
   await page.goto('./');
   const label = designText('<span class="lbl">TEMPLE', '{{clock}}');
   await expect(page.locator('.hd-l > .lbl')).toHaveText(new RegExp('^TEMPLE' + label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\d\\d:\\d\\d CT$'));
-  await expect(page.locator('.hd-name')).toHaveText(designText('<div class="vt hd-name">', '</div>'));
-  await expect(page.locator('.hd-name')).toHaveText('STEFFEN [LAST NAME]');
+  await expect(page.locator('.hd-name')).toHaveText(designText('<div class="vt hd-name">', '</div>').replace('[LAST NAME]', 'GONZALEZ'));
+  await expect(page.locator('.hd-name')).toHaveText('STEFFEN GONZALEZ');
   await expect(page.locator('.hd-title')).toHaveText(designText('<span class="hd-title">', '</span>'));
   await expect(page.locator('.hd-line')).toHaveText(designText('<div class="hd-line">', '</div>'));
   await expect(page.locator('.hd-sub')).toHaveText(designText('<p class="hd-sub">', '</p>'));
   await expect(page.locator('.hd-r > .lbl')).toHaveText('CONTACT');
-  await expect(page.locator('.hd-r .em')).toHaveText('[YOUR EMAIL]');
+  await expect(page.locator('.hd-r .em')).toHaveText('sgonzalez568@gmail.com');
   await expect(page.locator('.hd-r .em')).toHaveCSS('user-select', 'all');
   await expect(page.locator('.hd-r .btn')).toHaveText('COPY EMAIL');
   const ft = page.locator('footer.ft > span');
-  await expect(ft).toHaveText([designText('<footer class="ft"><span>', '</span>'), '[YOUR EMAIL]']);
+  await expect(ft).toHaveText([designText('<footer class="ft"><span>', '</span>'), 'sgonzalez568@gmail.com']);
 });
 
 // Line 5: the clock is Chicago time, HH:MM on a 00–23 hour, refreshed every 30 s.
@@ -123,7 +123,7 @@ test('COPY EMAIL copies, confirms, then resets after 1.6 s', async ({ page, cont
   const btn = page.locator('.hd-r .btn');
   await btn.click();
   await expect(btn).toHaveText('COPIED ✓');
-  expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('[YOUR EMAIL]');
+  expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('sgonzalez568@gmail.com');
   await page.clock.runFor(1500);
   await expect(btn).toHaveText('COPIED ✓');
   await page.clock.runFor(200);

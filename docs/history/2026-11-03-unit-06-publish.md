@@ -13,3 +13,10 @@
 **Rule 15:** review 1 zero lines, noting the secrets check skipped `package-lock.json` while the spec says every file; the skip was removed. Review 2 zero lines.
 
 **Not done (waits on Steffen):** spec lines 8–10. Creating the repo, the push, the Pages setting, the live screenshots and the stranger's-phone test.
+
+## Later the same day: live
+- Steffen published from GitHub Desktop. An old 2022 repo `Portfolio` blocked the name (GitHub names ignore case); it no longer shows publicly. The first publish came out private; Steffen made it public and set Pages to `main`, root.
+- The new repo took the folder's name, `Portfolio`, so the site answered only at `/Portfolio/` (Pages addresses are case-sensitive). The session renamed it to `portfolio` in the browser with Steffen's yes; `origin` now points at `Steffen568/portfolio`.
+- Live check (390 and 1280): 200, six cards, the graphic, both fonts, both image windows, no console errors, no failed requests, no sideways scroll. Screenshots: `screenshots/06-publish/live-*`.
+- Name and email filled from Steffen's chat message (STEFFEN GONZALEZ, sgonzalez568@gmail.com); unit 01's header checks now expect them.
+- False alarm: the secrets check flagged the unit 06 spec once it was committed (the spec spelled out the pattern it bans). The spec line was reworded; the check is unchanged.

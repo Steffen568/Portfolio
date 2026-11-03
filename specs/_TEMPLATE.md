@@ -14,7 +14,7 @@ Ports from the design:
 
 Must not:
 - <frozen-list items (SCOPE.md §4) this unit will be tempted to touch>
-- Rewrite a visible string; use an absolute path; add motion to the top bar; reuse a short class name for a drawing
+- Rewrite a visible string; use an absolute path; add anything to the environment graphic; nest anything deeper than card → panel → demo
 
 How to check:
 1. `npx playwright test tests/<unit>.spec.mjs` — written before the build, watched failing

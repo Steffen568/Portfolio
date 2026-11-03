@@ -30,7 +30,7 @@ for f in assets/*.js; do node --check "$f"; done
 echo "== Hook still blocks what it should =="
 node scripts/hooks/test-guard.mjs
 
-echo "== Playwright checks (routing, one page, still top bar, footer, widths, relative paths) =="
+echo "== Playwright checks (copy and data match the design, above the fold, widths, tap sizes, relative paths) =="
 npx playwright test --reporter=dot
 
 echo "VERIFY: ALL GREEN"

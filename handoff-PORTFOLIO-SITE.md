@@ -27,6 +27,7 @@ The owner redesigned away from tabs and density because a portfolio gets seconds
 
 1. **One page. No tabs, no pages, no routing between views.**
 2. **The 5-second read sits at the top:** name, one headline, short bio, skills, and contact, all without scrolling on desktop.
+2a. **Symmetric stage.** Sports tools flank the environment two on each side, and websites sit centered below. Don't widen one side to make room for something.
 3. **One centerpiece:** the environment graphic. Projects branch off it. Nothing gets added to the centerpiece unless something comes out.
 4. **One level deep.** Tapping a project opens one panel. The panel's button opens the demo. Nothing nests further.
 5. **Descriptive copy only.** No instructions to the visitor ("hover here", "tap a card"). No "this site". Plain words for a non-technical reader.
@@ -84,24 +85,33 @@ Left side:
 - Title line, small amber caps: **AI SYSTEMS BUILDER · HARNESS ENGINEERING**.
 - Headline: **"I build the environment AI works inside."**
 - Bio paragraph, word for word:
-  > I design multi-agent workflows: rules the AI reads every session, safety checks that block risky moves, and quality gates it can’t skip, with a second AI reviewing the work before it ships. Every mistake becomes a new check. Inside that environment I build sports data systems and websites with:
+  > I design multi-agent workflows: rules the AI reads every session, safety checks that block risky moves, and quality gates it can’t skip. Every mistake becomes a new check. Inside that environment I build sports data systems and websites with:
 - **The skills row** directly under that sentence, so the buttons finish it. 8 buttons, each with a count of the projects that show it. See "Skills" below.
 - **The definition line** under the row. It reads `8 SKILLS ACROSS 6 PROJECTS` until a skill is active, then shows `SKILL NAME:` + its definition + "Shown in …" with the project names.
 
 Right side: `CONTACT`, the email as selectable text, and **COPY EMAIL**, which shows "COPIED ✓" for 1.6 s.
 
-### 2. The stage: three columns
+### 2. The stage: symmetric, with the environment in the middle
 
-- **Left: `SPORTS DATA TOOLS` (4).** The widest column and the larger heading (15px): these are the complex work and lead the page. A 2×2 grid: Scout Team, The Wire, SlateHub, SCOUT DFS. They animate in first.
+The layout is mirrored left to right so the page reads as balanced. All cards are the same width.
+
+- **Left: `SPORTS DATA TOOLS` · `1–2 OF 4`.** Scout Team above The Wire.
 - **Center: `THE ENVIRONMENT`.** A window with a header bar ("every project is built inside it"), the graphic, the three tiles, and two buttons: **CLAUDE.md ⤢** and **BUILDER'S MAP ⤢**.
-- **Right: `WEBSITES` (2).** One column of cards: Holy Cross, Optometry practice.
+- **Right: `SPORTS DATA TOOLS` · `3–4 OF 4`.** SlateHub above SCOUT DFS. The heading is mirrored: the count on the left, the title on the right.
+- **Below, centered under the graphic: `WEBSITES` · 2.** Holy Cross and Optometry side by side, each the same width as a side column (`calc((100% - 640px) / 2)`).
 
-Desktop columns: `minmax(0,1.45fr) minmax(440px,580px) minmax(0,.85fr)`, gap 30px. Card thumbnails are 2:1 on desktop so everything fits. All six cards are visible on a 1440×900 screen without scrolling. This was measured in the design; keep it true.
+Details:
+
+- Desktop columns: `minmax(0,1fr) minmax(440px,580px) minmax(0,1fr)`, gap 30px. The two side columns stretch to the same height, and their two cards share it equally (`grid-template-rows: 1fr 1fr`), so the left and right edges line up.
+- Side-column thumbnails are 5:2. Website thumbnails are 21:9.
+- Sports headings are 15px; the Websites heading is 12px. Sports cards animate in first.
+- **At 1440×900:** the header, the environment window and all four sports cards are visible without scrolling. This was measured in the design (bottom cards end at about 889px); keep it true. The two website cards sit one short scroll below on purpose: the first viewers are in sports.
 
 **Connector lines.** Right-angled dashed amber lines run from the edge of the environment window to each card. They are drawn by measuring the elements on load, on resize, and after fonts load (see `measure()`).
 
 - The dashes flow slowly.
 - A line brightens and speeds up when its card is hovered or open, or when the active skill applies to that card.
+- Lines to the website cards drop from the bottom edge of the environment window, then turn and land on the top of each card.
 - Lines are hidden at 1000px and below.
 
 ### 3. The environment graphic (the centerpiece)
@@ -154,7 +164,7 @@ Leaving the tile clears the spotlight. On a phone, tapping another tile switches
 
 Each card is one button:
 
-- the demo screenshot (2:1 on desktop; `demos/<name>/screenshots/desktop.png`, `object-fit: cover; object-position: top`), or the striped placeholder with the ticker (HCRS, SCTM…) and "SCREENSHOT PENDING";
+- the demo screenshot (5:2 for sports cards and 21:9 for websites on desktop; `demos/<name>/screenshots/desktop.png`, `object-fit: cover; object-position: top`), or the striped placeholder with the ticker (HCRS, SCTM…) and "SCREENSHOT PENDING";
 - the name;
 - a status pill (green dot; orange for in progress);
 - one line;
@@ -217,8 +227,8 @@ Behavior:
 
 **At 1000px and below:**
 
-- The environment comes first, then Sports data tools, then Websites.
-- The two project groups run down a single dashed stem on the left (`border-left: 2px dashed`).
+- The environment comes first, then all four sports tools (the second sports heading is hidden), then Websites.
+- Project groups run down a single dashed stem on the left (`border-left: 2px dashed`). Cards size to their content; the equal-height rule is desktop only.
 - No connector lines.
 
 **At 640px and below:**
@@ -250,7 +260,7 @@ The plan's line "Looks right in light and dark mode" becomes: **"Dark by design;
 Everything else applies as written: 390 / 768 / 1280px, no sideways scroll, nothing overflowing, buttons at least 44px tall, zero console errors, screenshots saved. Add these checks:
 
 - **The 3-second test.** Show the page at 1440×900 to someone for 3 seconds. They can say his name, "environment", and at least one of protects / efficient / self-learning.
-- **At 1440×900,** the header, the whole environment window and all six cards are visible without scrolling.
+- **At 1440×900,** the header, the whole environment window and all four sports cards are visible without scrolling. Left and right card edges line up.
 - **Connector lines** land on their cards at 1100, 1280 and 1440px wide, and after a resize.
 - **One level deep:** card → panel → demo. Nothing else opens anything.
 - **Every skill button** filters the right cards, and every pinned filter unpins.

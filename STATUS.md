@@ -10,7 +10,7 @@ Ceiling: 60 lines (`scripts/verify.sh`). History goes to `docs/history/` the day
 | Phase | State |
 |---|---|
 | Setup | CLAUDE.md, SCOPE.md, STATUS.md rewritten for the redesign; `specs/portfolio-site.md` and `specs/01-shell-header.md` written 2026-11-03. |
-| Units | **Unit 01 Checked** 2026-11-03. Header ends at 261 px at 1440×900 (budget for unit 03). Detail: `docs/history/2026-11-03-unit-01-shell-header.md`. |
+| Units | **Units 01 and 02 Checked** 2026-11-03. At 1440×900 the header ends at 261 px and the environment window at ~832 px; unit 03's sports cards sit beside it and must end by 900. Detail: `docs/history/2026-11-03-unit-0*.md`. |
 | Demos | None copied into `demos/` yet: every card will show the striped placeholder. |
 | Publish | Not started (unit 06). |
 
@@ -18,7 +18,7 @@ Ceiling: 60 lines (`scripts/verify.sh`). History goes to `docs/history/` the day
 | # | Unit | Spec | Build | Checked (Rule 15) | Done (stranger's phone) |
 |---|---|---|---|---|---|
 | 01 | Shell + header | ✅ 2026-11-03 | ✅ 2026-11-03 (verify 20/20; 3 breaks caught) | ✅ 2026-11-03 (review 1: zero lines) | — |
-| 02 | Environment graphic | — | — | — | — |
+| 02 | Environment graphic | ✅ 2026-11-03 | ✅ 2026-11-03 (verify 42/42; 4 breaks caught) | ✅ 2026-11-03 (review 1: zero lines) | — |
 | 03 | Cards + connectors | — | — | — | — |
 | 04 | Skills + panel | — | — | — | — |
 | 05 | Phone pass + quality standard | — | — | — | — |
@@ -27,15 +27,16 @@ Ceiling: 60 lines (`scripts/verify.sh`). History goes to `docs/history/` the day
 ## Proposed changes (Steffen decides)
 1. **Skill buttons below 44 px.** The design makes them 32 px on desktop and 40 px on phones; the handoff says "at least 40px" for this row; our rule says 44. Ported as designed for now. Raising them to 44 everywhere would likely wrap the row onto two lines on desktop and push the stage down. Needed before unit 04.
 2. **Clock at midnight:** shows 00:xx, not the design's 24:xx (Chrome quirk; same fix as v1).
+3. **CLOSE ✕ is 44 px tall, not the design's 34 px** (the window's amber bar grows to match). The quality standard says every button ≥ 44 and the handoff names no exception, so the spec won (Rule 7). Say if you prefer the design's 34. Not blocking.
 
 ## Open inputs (SCOPE.md §5)
 `[LAST NAME]` (header) · `[YOUR EMAIL]` (header, copy button, footer) · GitHub username · each demo's folder and `screenshots/desktop.png` · Optometry demo and final copy.
 
-**Test corrected (Rule 13, for Steffen to see):** unit 01's scanline check compared the overlay with the full window; the reserved scrollbar strip can't be covered, so it now compares with a full-screen fixed layer. The page was not changed.
+**Test corrected (Rule 13, for Steffen to see):** unit 01's scanline check compared the overlay with the full window; the reserved scrollbar strip can't be covered, so it now compares with a full-screen fixed layer. The page was not changed. **Unit 02, same cause:** its 390 px full-bleed check first compared with `clientWidth`, which counts that strip (390 vs a usable 375); it now uses the same fixed-layer measurement. Page unchanged.
 
 ## Failing checks
-None. `npm run verify` 20/20.
+None. `npm run verify` 42/42.
 
 ## Next
-1. Steffen reads `screenshots/01-shell-header/` and answers Proposed change 1 (skill button height) before unit 04.
-2. Unit 02 (environment graphic) in a new session: write `specs/02-environment.md` first.
+1. Steffen reads `screenshots/01-shell-header/` and `screenshots/02-environment/`; answers Proposed change 1 (skill button height) before unit 04.
+2. Unit 03 (cards + connectors) in a new session: write `specs/03-cards-connectors.md` first.

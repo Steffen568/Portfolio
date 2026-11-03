@@ -1,0 +1,14 @@
+{
+  "name": "portfolio",
+  "private": true,
+  "type": "module",
+  "description": "Steffen's portfolio. Plain static files; this file only runs the checks.",
+  "scripts": {
+    "serve": "node scripts/serve.mjs",
+    "test": "playwright test",
+    "verify": "bash scripts/verify.sh"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1"
+  }
+}

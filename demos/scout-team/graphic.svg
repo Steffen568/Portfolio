@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="15" fill="currentColor" stroke="none">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+    </marker>
+  </defs>
+
+  <!-- Inputs -->
+  <g fill="none" stroke="currentColor" stroke-width="1.5">
+    <rect x="130" y="10" width="140" height="40" rx="4"/>
+    <rect x="330" y="10" width="140" height="40" rx="4"/>
+    <rect x="530" y="10" width="140" height="40" rx="4"/>
+    <path d="M200 50 V88" marker-end="url(#arrow)"/>
+    <path d="M400 50 V88" marker-end="url(#arrow)"/>
+    <path d="M600 50 V88" marker-end="url(#arrow)"/>
+  </g>
+  <text x="200" y="35" text-anchor="middle">CFBD</text>
+  <text x="400" y="35" text-anchor="middle">DraftKings</text>
+  <text x="600" y="35" text-anchor="middle">SIS</text>
+
+  <!-- The bar -->
+  <rect x="10" y="90" width="780" height="46" rx="4" fill="none" stroke="#e8890c" stroke-width="2"/>
+  <text x="400" y="119" text-anchor="middle" font-size="18" font-weight="700" fill="#e8890c">One game</text>
+
+  <!-- Feeds -->
+  <g fill="none" stroke="currentColor" stroke-width="1.5">
+    <path d="M135 136 V168" marker-end="url(#arrow)"/>
+    <path d="M400 136 V168" marker-end="url(#arrow)"/>
+    <path d="M665 136 V168" marker-end="url(#arrow)"/>
+    <rect x="10" y="170" width="250" height="170" rx="4"/>
+    <rect x="275" y="170" width="250" height="170" rx="4"/>
+    <rect x="540" y="170" width="250" height="170" rx="4"/>
+  </g>
+
+  <!-- Panels -->
+  <text x="135" y="208" text-anchor="middle" font-size="18" font-weight="700" fill="#e8890c">OVERVIEW</text>
+  <text x="135" y="248" text-anchor="middle">Who both teams are</text>
+  <text x="135" y="272" text-anchor="middle">and how they played.</text>
+
+  <text x="400" y="208" text-anchor="middle" font-size="18" font-weight="700" fill="#e8890c">MATCHUP</text>
+  <text x="400" y="248" text-anchor="middle">Each unit against its</text>
+  <text x="400" y="272" text-anchor="middle">opponent, down to players.</text>
+
+  <text x="665" y="208" text-anchor="middle" font-size="18" font-weight="700" fill="#e8890c">TEAM</text>
+  <text x="665" y="248" text-anchor="middle">One team's rooms, arrivals,</text>
+  <text x="665" y="272" text-anchor="middle">departures and player grades.</text>
+
+  <!-- The line -->
+  <text x="400" y="388" text-anchor="middle" font-size="16">No projections. No written takes. The data is shown, not narrated.</text>
+</svg>

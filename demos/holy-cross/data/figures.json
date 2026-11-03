@@ -1,0 +1,62 @@
+{
+  "tuition": {
+    "middleSchool": {
+      "value": 8272
+    },
+    "highSchool": {
+      "value": 13145
+    }
+  },
+  "tefa": {
+    "standardAward": {
+      "value": 10474
+    },
+    "maxWithIep": {
+      "value": 30000
+    },
+    "povertyGuideline": {
+      "base": {
+        "value": 15650
+      },
+      "perExtraPerson": {
+        "value": 5500
+      }
+    }
+  },
+  "discounts": {
+    "alumni": {
+      "value": 500
+    },
+    "sibling": {
+      "value": 500
+    },
+    "servicePercent": {
+      "value": 25
+    },
+    "paidInFullPercent": {
+      "value": 3
+    },
+    "referAFriend": {
+      "value": 1000
+    }
+  },
+  "scholarships": {
+    "valedictorianSalutatorian": {
+      "value": 1000
+    }
+  },
+  "fees": {
+    "factsSetupPaidInFull": {
+      "value": 25
+    },
+    "factsSetupMonthly": {
+      "value": 55
+    },
+    "enrollment": {
+      "value": 25
+    }
+  },
+  "school": {
+    "mainPhoneTel": "+12104339395"
+  }
+}

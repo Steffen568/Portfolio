@@ -122,6 +122,15 @@
     if (text != null) e.textContent = text;
     return e;
   }
+  // The demo's screenshot, laid over the striped placeholder; if it can't load, the placeholder shows.
+  function shot(p, loading) {
+    var img = el('img');
+    img.alt = '';
+    img.loading = loading;
+    img.onerror = function () { img.hidden = true; };
+    img.src = './' + p.path + 'screenshots/desktop.png';
+    return img;
+  }
   var data = P.projects.filter(function (p) { return p.group === 'data'; });
   [
     [document.querySelector('.col-main:not(.col-r) .grid1'), data.slice(0, 2), '30px', 0],
@@ -135,7 +144,7 @@
       b.style.cssText = '--fx: ' + place[2] + '; animation-delay: ' + (0.5 + (place[3] + i) * 0.12).toFixed(2) + 's';
       b.setAttribute('aria-label', p.name + ': ' + p.line);
       var thumb = el('span', 'thumb');
-      thumb.append(el('b', null, p.tkr), el('span', null, 'SCREENSHOT PENDING'));
+      thumb.append(el('b', null, p.tkr), el('span', null, 'SCREENSHOT PENDING'), shot(p, 'lazy'));
       var st = el('span', 'st' + (p.wip ? ' wip' : ''));
       st.append(el('i'), p.status);
       var top = el('span', 'card-t');
@@ -274,6 +283,9 @@
     q('[role="dialog"]').setAttribute('aria-label', p.name);
     q('.wh b').textContent = p.tkr + ' · ' + (p.group === 'web' ? 'WEBSITE' : 'SPORTS DATA TOOL');
     q('.pthumb b').textContent = p.tkr;
+    var prevShot = q('.pthumb img');
+    if (prevShot) prevShot.remove();
+    q('.pthumb').appendChild(shot(p, 'eager'));
     q('.pinfo .st').className = 'st' + (p.wip ? ' wip' : '');
     q('.pinfo .st').replaceChildren(el('i'), p.status);
     q('.pinfo h2').textContent = p.name.toUpperCase();

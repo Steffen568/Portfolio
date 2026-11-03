@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="440" viewBox="0 0 800 440" fill="none" font-family="Arial, Helvetica, sans-serif" font-size="16" role="img" aria-label="A fork diagram of the guided tour">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+      <path d="M0 0L9 4.5L0 9z" fill="currentColor"/>
+    </marker>
+  </defs>
+
+  <!-- Front door -->
+  <rect x="16" y="86" width="196" height="108" rx="12" stroke="#C9A15B" stroke-width="3"/>
+  <text x="114" y="124" text-anchor="middle" fill="currentColor" font-weight="700"><tspan x="114">Front door:</tspan><tspan x="114" dy="22">why are you</tspan><tspan x="114" dy="22">visiting?</tspan></text>
+
+  <!-- Fork to the four routes -->
+  <g stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)">
+    <path d="M212 120L276 42"/>
+    <path d="M212 132L276 106"/>
+    <path d="M212 150L276 170"/>
+    <path d="M212 168L276 234"/>
+  </g>
+
+  <!-- The four routes -->
+  <g stroke="currentColor" stroke-width="1.5">
+    <rect x="278" y="18" width="222" height="48" rx="10"/>
+    <rect x="278" y="82" width="222" height="48" rx="10"/>
+    <rect x="278" y="146" width="222" height="48" rx="10"/>
+    <rect x="278" y="210" width="222" height="48" rx="10"/>
+  </g>
+  <g fill="currentColor" text-anchor="middle">
+    <text x="389" y="48">Routine eye exam</text>
+    <text x="389" y="112">Glasses &amp; frames</text>
+    <text x="389" y="176">Dry, burning eyes</text>
+    <text x="389" y="240">Contacts &amp; hard-to-fit</text>
+  </g>
+
+  <!-- Each route to booking -->
+  <g stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)">
+    <path d="M500 42H558"/>
+    <path d="M500 106H558"/>
+    <path d="M500 170H558"/>
+    <path d="M500 234H558"/>
+  </g>
+  <rect x="560" y="18" width="224" height="240" rx="10" stroke="currentColor" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="672" y="132" text-anchor="middle" fill="currentColor"><tspan x="672">Book / call</tspan><tspan x="672" dy="22">(disabled in demo)</tspan></text>
+
+  <!-- Two side exits -->
+  <g stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)">
+    <path d="M90 194V310"/>
+    <path d="M150 194V272Q150 290 170 290H360Q389 290 389 308V310"/>
+  </g>
+  <g stroke="currentColor" stroke-width="1.5">
+    <rect x="16" y="312" width="222" height="48" rx="10"/>
+    <rect x="278" y="312" width="222" height="48" rx="10"/>
+  </g>
+  <g fill="currentColor" text-anchor="middle">
+    <text x="127" y="342">Traditional full site</text>
+    <text x="389" y="342">Tour in Español</text>
+  </g>
+
+  <text x="400" y="414" text-anchor="middle" fill="currentColor" font-size="15">Concept redesign · optometry practice · name withheld</text>
+</svg>

@@ -1,0 +1,283 @@
+{
+  "about": "The stand-in facts these pages were built from. The pages are already built and do not read this file.",
+  "facts": [
+    {
+      "id": "practice.name",
+      "value": {
+        "en": "the practice",
+        "es": "el consultorio"
+      },
+      "source": "demo stand-in",
+      "mark": "OK"
+    },
+    {
+      "id": "practice.address",
+      "value": {
+        "en": "Address withheld.",
+        "es": "Dirección reservada."
+      },
+      "source": "demo stand-in",
+      "mark": "OK"
+    },
+    {
+      "id": "practice.phone",
+      "value": {
+        "en": "(phone withheld)",
+        "es": "(teléfono reservado)"
+      },
+      "source": "demo stand-in",
+      "mark": "OK"
+    },
+    {
+      "id": "practice.hours",
+      "value": {
+        "en": "Hours withheld",
+        "es": "Horario reservado"
+      },
+      "source": "demo stand-in",
+      "mark": "OK"
+    },
+    {
+      "id": "practice.parking",
+      "value": "[NEEDED: parking note]",
+      "source": "demo stand-in",
+      "mark": "NEEDED"
+    },
+    {
+      "id": "practice.frame-shop",
+      "value": "An outside frame shop, linked and not rebuilt",
+      "source": "demo stand-in",
+      "mark": "OK",
+      "parts": {
+        "url": "https://example.invalid/"
+      }
+    },
+    {
+      "id": "practice.frame-count",
+      "value": "Hundreds of frames",
+      "source": "demo stand-in",
+      "mark": "OK",
+      "parts": {
+        "display": {
+          "en": "Hundreds of frames",
+          "es": "Cientos de armazones"
+        },
+        "lower": {
+          "en": "hundreds",
+          "es": "cientos"
+        }
+      }
+    },
+    {
+      "id": "practice.closed-office",
+      "value": "[NEEDED: the practice's wording, e.g. \"go to an emergency room\"]",
+      "source": "demo stand-in",
+      "mark": "NEEDED"
+    },
+    {
+      "id": "practice.scheduler",
+      "value": "[NEEDED: which HIPAA-compliant scheduler the practice uses]",
+      "source": "demo stand-in",
+      "mark": "NEEDED",
+      "parts": {
+        "tag": "[NEEDED: which HIPAA-compliant scheduler the practice uses]"
+      }
+    },
+    {
+      "id": "doctor-a.name",
+      "value": "Dr. A, OD",
+      "source": "demo stand-in",
+      "mark": "OK",
+      "parts": {
+        "name": "Dr. A",
+        "letters": "OD",
+        "lettersDot": "OD",
+        "short": "Dr. A"
+      }
+    },
+    {
+      "id": "doctor-a.specialty",
+      "value": "Myopia and specialty contact lenses",
+      "source": "demo stand-in",
+      "mark": "OK",
+      "parts": {
+        "sentence": {
+          "en": "Focus: myopia and specialty contact lenses.",
+          "es": "Se dedica a la miopía y a los lentes de contacto especiales."
+        }
+      }
+    },
+    {
+      "id": "doctor-b.name",
+      "value": "Dr. B, OD",
+      "source": "demo stand-in",
+      "mark": "OK",
+      "parts": {
+        "name": "Dr. B",
+        "letters": "OD",
+        "titled": {
+          "en": "Dr. B",
+          "es": "Dr. B"
+        },
+        "short": {
+          "en": "Dr. B",
+          "es": "Dr. B"
+        }
+      }
+    },
+    {
+      "id": "doctor-b.dry-eye-focus",
+      "value": "one of the conditions this doctor treats most often",
+      "source": "demo stand-in",
+      "mark": "OK",
+      "parts": {
+        "pageSaysLocal": {
+          "en": "one of the conditions this doctor treats most often",
+          "es": "de lo que más trata este doctor"
+        }
+      }
+    },
+    {
+      "id": "doctor-b.areas-of-care",
+      "value": "Whole-family care",
+      "source": "demo stand-in",
+      "mark": "OK",
+      "parts": {
+        "keratoconus": {
+          "en": "keratoconus",
+          "es": "queratocono"
+        }
+      }
+    },
+    {
+      "id": "site.contacts-scleral",
+      "value": "Scleral lenses",
+      "source": "demo stand-in",
+      "mark": "OK",
+      "parts": {
+        "lenses": {
+          "en": "scleral lenses",
+          "es": "lentes esclerales"
+        }
+      }
+    },
+    {
+      "id": "testimonials.concept-quotes",
+      "value": [
+        {
+          "name": "Patient",
+          "quote": "A real patient review goes here, word for word."
+        },
+        {
+          "name": "Patient",
+          "quote": "A real patient review goes here, word for word."
+        },
+        {
+          "name": "Patient",
+          "quote": "A real patient review goes here, word for word."
+        },
+        {
+          "name": "Patient",
+          "quote": "A real patient review goes here, word for word."
+        }
+      ],
+      "source": "demo stand-in",
+      "mark": "OK"
+    },
+    {
+      "id": "dry-eye.symptoms",
+      "value": [
+        "eye discomfort",
+        "blurred vision",
+        "feeling like something is in your eye",
+        "burning",
+        "redness",
+        "too much tearing"
+      ],
+      "source": "demo stand-in",
+      "mark": "OK",
+      "parts": {
+        "s1": {
+          "en": "Eye discomfort",
+          "es": "Molestia en los ojos"
+        },
+        "s2": {
+          "en": "Blurred vision",
+          "es": "Visión borrosa"
+        },
+        "s3": {
+          "en": "Feels like something is in your eye",
+          "es": "Sensación de algo en el ojo"
+        },
+        "s4": {
+          "en": "Burning",
+          "es": "Ardor"
+        },
+        "s5": {
+          "en": "Redness",
+          "es": "Enrojecimiento"
+        },
+        "s6": {
+          "en": "Too much tearing",
+          "es": "Lagrimeo excesivo"
+        }
+      }
+    },
+    {
+      "id": "dry-eye.lead-doctor",
+      "value": "[NEEDED]",
+      "source": "demo stand-in",
+      "mark": "NEEDED",
+      "parts": {
+        "tag": "[NEEDED: who runs the dry-eye clinic]"
+      }
+    },
+    {
+      "id": "pricing.vision-plans",
+      "value": "EyeMed and VSP; [NEEDED: full vision plan list]",
+      "source": "demo stand-in",
+      "mark": "CONFIRM",
+      "parts": {
+        "named": "EyeMed, VSP"
+      }
+    },
+    {
+      "id": "pricing.medical-plans",
+      "value": "Medicare, Aetna, Blue Cross Blue Shield, Cigna, UnitedHealthcare",
+      "source": "demo stand-in",
+      "mark": "CONFIRM",
+      "parts": {
+        "named": "Medicare, Aetna, Blue Cross Blue Shield, Cigna, UnitedHealthcare"
+      }
+    },
+    {
+      "id": "pricing.tricare",
+      "value": "[NEEDED: Tricare yes/no]",
+      "source": "demo stand-in",
+      "mark": "NEEDED",
+      "parts": {
+        "name": "Tricare",
+        "tag": "[NEEDED: accepted?]"
+      }
+    },
+    {
+      "id": "pricing.self-pay-exam",
+      "value": "[NEEDED]",
+      "source": "demo stand-in",
+      "mark": "NEEDED",
+      "parts": {
+        "tag": "[NEEDED: price]"
+      }
+    },
+    {
+      "id": "pricing.dry-eye-evaluation",
+      "value": "[NEEDED]",
+      "source": "demo stand-in",
+      "mark": "NEEDED",
+      "parts": {
+        "price": "[NEEDED: price]",
+        "covered": "[NEEDED: covered?]"
+      }
+    }
+  ]
+}

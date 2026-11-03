@@ -1,0 +1,2 @@
+# Demos are copied in byte for byte (specs/07-demos.md line 1): git must not change their line endings.
+demos/** -text

@@ -1,0 +1,16 @@
+/* The fonts the page's styles name, shipped locally (SIL Open Font License, via Fontsource). */
+@font-face{font-family:'Inter Tight';font-weight:400;font-display:swap;src:url(./fonts/inter-tight-400.woff2) format('woff2');}
+@font-face{font-family:'Inter Tight';font-weight:500;font-display:swap;src:url(./fonts/inter-tight-500.woff2) format('woff2');}
+@font-face{font-family:'Inter Tight';font-weight:600;font-display:swap;src:url(./fonts/inter-tight-600.woff2) format('woff2');}
+@font-face{font-family:'Inter Tight';font-weight:700;font-display:swap;src:url(./fonts/inter-tight-700.woff2) format('woff2');}
+@font-face{font-family:'Inter Tight';font-weight:800;font-display:swap;src:url(./fonts/inter-tight-800.woff2) format('woff2');}
+@font-face{font-family:'Inter Tight';font-weight:900;font-display:swap;src:url(./fonts/inter-tight-900.woff2) format('woff2');}
+@font-face{font-family:'Geist Mono';font-weight:400;font-display:swap;src:url(./fonts/geist-mono-400.woff2) format('woff2');}
+@font-face{font-family:'Geist Mono';font-weight:500;font-display:swap;src:url(./fonts/geist-mono-500.woff2) format('woff2');}
+@font-face{font-family:'Geist Mono';font-weight:600;font-display:swap;src:url(./fonts/geist-mono-600.woff2) format('woff2');}
+@font-face{font-family:'Geist Mono';font-weight:700;font-display:swap;src:url(./fonts/geist-mono-700.woff2) format('woff2');}
+@font-face{font-family:'Geist Mono';font-weight:800;font-display:swap;src:url(./fonts/geist-mono-800.woff2) format('woff2');}
+@font-face{font-family:'JetBrains Mono';font-weight:400;font-display:swap;src:url(./fonts/jetbrains-mono-400.woff2) format('woff2');}
+@font-face{font-family:'JetBrains Mono';font-weight:500;font-display:swap;src:url(./fonts/jetbrains-mono-500.woff2) format('woff2');}
+@font-face{font-family:'JetBrains Mono';font-weight:600;font-display:swap;src:url(./fonts/jetbrains-mono-600.woff2) format('woff2');}
+@font-face{font-family:'JetBrains Mono';font-weight:700;font-display:swap;src:url(./fonts/jetbrains-mono-700.woff2) format('woff2');}

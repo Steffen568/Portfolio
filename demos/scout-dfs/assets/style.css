@@ -1,0 +1,181 @@
+/* The terminal's look (src/dfs/web/static/app.js), rebuilt for a phone. Dark is the
+   real one. Light exists only because a portfolio page has to read in both. */
+@font-face { font-family: "IBM Plex Mono"; font-weight: 400; font-display: swap; src: url("./fonts/ibm-plex-mono-400.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 500; font-display: swap; src: url("./fonts/ibm-plex-mono-500.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 600; font-display: swap; src: url("./fonts/ibm-plex-mono-600.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 700; font-display: swap; src: url("./fonts/ibm-plex-mono-700.woff2") format("woff2"); }
+
+:root {
+  --bg: #000; --panel: #0a0a0a; --raised: #111; --line: #2a2a2a; --line-soft: #1c1c1c;
+  --text: #e8e8e8; --dim: #9a9a9a; --faint: #8a8a8a;
+  --amber: #ff9f0a; --amber-ink: #000; --amber-bar: #1a1200; --amber-line: #3a2a00; --amber-soft: #2a1d00;
+  --yellow: #ffd75e; --green: #4af6c3; --green-soft: #06281f; --red: #ff5c5c; --red-soft: #2c0b0b; --blue: #6cd8ff;
+  --blue-ink: #000;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f6f3ec; --panel: #fffdf8; --raised: #fff; --line: #cfc8b8; --line-soft: #e5dfd2;
+    --text: #1a1a1a; --dim: #55524a; --faint: #66625a;
+    --amber: #8a4a00; --amber-ink: #fff; --amber-bar: #f3e6cc; --amber-line: #d9c294; --amber-soft: #f7ebd2;
+    --yellow: #7a5a00; --green: #006b50; --green-soft: #d6f2e8; --red: #b3261e; --red-soft: #f9dedc; --blue: #005f85;
+    --blue-ink: #fff;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+html { -webkit-text-size-adjust: 100%; }
+body { font-family: "IBM Plex Mono", monospace; font-size: 13px; line-height: 1.45; overflow-x: hidden; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+h1, h2, h3 { font: inherit; margin: 0; }
+.boot { padding: 24px 16px; color: var(--amber); }
+
+/* ---------- demo banner: in the flow, so it can never cover content ---------- */
+.banner { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; padding: 6px 12px; background: var(--amber-soft); border-bottom: 1px solid var(--amber-line); }
+.banner-text { flex: 1 1 280px; min-width: 0; }
+.banner-text strong { display: block; color: var(--amber); font-weight: 600; }
+.banner-text span { display: block; color: var(--dim); font-size: 12px; }
+.how-btn { flex: none; min-height: 44px; padding: 0 12px; background: transparent; border: 1px solid var(--amber); color: var(--amber); font-weight: 600; }
+.how { background: var(--panel); border-bottom: 1px solid var(--amber-line); padding: 12px; }
+.how[hidden] { display: none; }
+.how-grid { display: grid; gap: 14px; grid-template-columns: 1fr; max-width: 1180px; }
+.how h2 { color: var(--amber); font-weight: 700; letter-spacing: 1px; margin-bottom: 6px; }
+.how ul, .how ol { margin: 0; padding-left: 20px; }
+.how li { margin-bottom: 3px; }
+.how p { margin: 0 0 6px; }
+@media (min-width: 768px) { .how-grid { grid-template-columns: 1fr 1.4fr 1fr; } }
+
+/* ---------- status bar ---------- */
+.status { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 14px; padding: 6px 12px; background: var(--amber-bar); border-bottom: 1px solid var(--amber-line); }
+.brand { color: var(--amber); font-weight: 700; font-size: 15px; letter-spacing: 1px; }
+.status .label { font-weight: 600; }
+.status .dim, .dim { color: var(--dim); }
+.status-right { display: flex; flex-wrap: wrap; gap: 2px 14px; margin-left: auto; color: var(--dim); }
+.status-right b { font-weight: 500; }
+.c-yellow { color: var(--yellow); } .c-green { color: var(--green); } .c-amber { color: var(--amber); }
+.c-red { color: var(--red); } .c-blue { color: var(--blue); } .c-text { color: var(--text); }
+.status-right .slots { overflow-wrap: anywhere; }
+
+/* ---------- game banner: scrolls inside itself ---------- */
+.games { display: flex; gap: 6px; padding: 6px 8px; overflow-x: auto; background: var(--panel); border-bottom: 1px solid var(--line); }
+.chip-game { flex: none; min-height: 44px; padding: 4px 10px; background: var(--raised); border: 1px solid var(--line); text-align: left; white-space: nowrap; }
+.chip-game.on { background: var(--blue); border-color: var(--blue); color: var(--blue-ink); }
+.chip-game.on .dim, .chip-game.on .c-yellow { color: var(--blue-ink); }
+.chip-game small { display: block; font-size: 12px; color: var(--dim); }
+.chip-game.on small { color: var(--blue-ink); }
+
+/* ---------- tabs ---------- */
+.tabs { display: flex; flex-wrap: wrap; gap: 2px; padding: 4px 8px; background: var(--panel); border-bottom: 1px solid var(--line); align-items: center; }
+.tab { min-height: 44px; padding: 4px 12px; background: var(--raised); color: var(--amber); border: 1px solid var(--amber-line); font-weight: 700; letter-spacing: 1px; }
+.tab.on { background: var(--amber); color: var(--amber-ink); }
+.tab.off { color: var(--faint); border-color: var(--line); }
+.tab-count { margin-left: auto; display: flex; flex-wrap: wrap; gap: 2px 12px; color: var(--dim); padding: 4px; }
+
+/* ---------- the build bar: the one thing a stranger has to find ---------- */
+.runbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 8px 12px; background: var(--panel); border-bottom: 1px solid var(--line); }
+.run { min-height: 48px; padding: 0 20px; background: var(--amber); color: var(--amber-ink); border: 0; font-weight: 700; letter-spacing: 1px; font-size: 15px; flex: 0 1 auto; }
+.run[disabled] { opacity: .6; cursor: progress; }
+.run-note { flex: 1 1 220px; min-width: 0; color: var(--dim); }
+.run-note b { font-weight: 600; }
+
+/* ---------- refusals ---------- */
+.notice { margin: 10px 12px; padding: 10px 12px; border: 1px solid var(--red); background: var(--red-soft); color: var(--text); white-space: pre-line; overflow-wrap: anywhere; }
+.notice.warn { border-color: var(--amber); background: var(--amber-soft); }
+
+/* ---------- panels ---------- */
+.body { padding: 10px 12px 16px; }
+.panel-head { color: var(--amber); font-weight: 700; letter-spacing: 1px; padding: 8px 0 6px; }
+.panel-head small { color: var(--faint); font-size: 12px; font-weight: 400; letter-spacing: 0; margin-left: 6px; }
+.build-grid { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+.build-grid > * { min-width: 0; }
+@media (min-width: 768px) { .build-grid { grid-template-columns: minmax(280px, 340px) minmax(0, 1fr); } }
+
+.field { display: flex; gap: 10px; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--line-soft); }
+.field-text { min-width: 0; flex: 1; }
+.field-text b { display: block; font-weight: 600; }
+.field-text small { display: block; color: var(--dim); font-size: 12px; }
+.field input { width: 92px; min-height: 44px; padding: 0 8px; text-align: right; background: var(--raised); border: 1px solid var(--line); flex: none; border-radius: 0; }
+.field.off .field-text b, .field.off input { color: var(--faint); }
+.field.off input { cursor: not-allowed; }
+.seg { display: flex; gap: 2px; flex-wrap: wrap; padding: 6px 0 10px; border-bottom: 1px solid var(--line-soft); }
+.seg button { flex: 1 1 60px; min-height: 44px; background: var(--raised); border: 1px solid var(--amber-line); color: var(--amber); font-weight: 600; }
+.seg button.on { background: var(--amber); color: var(--amber-ink); }
+.stack-label { padding-top: 10px; }
+
+.health { display: grid; grid-template-columns: repeat(auto-fit, minmax(92px, 1fr)); gap: 4px; }
+.health div { background: var(--panel); border: 1px solid var(--line-soft); padding: 8px; min-width: 0; }
+.health small { display: block; color: var(--dim); font-size: 12px; }
+.health b { font-size: 22px; font-weight: 600; }
+
+/* ---------- tables scroll inside their own box, never the page ---------- */
+.scroll { overflow-x: auto; }
+@media (min-width: 1000px) { .swipe-hint { display: none; } }
+.pool-box { overflow: auto; max-height: 62vh; min-height: 320px; border: 1px solid var(--line); }
+table { border-collapse: collapse; width: 100%; }
+th { position: sticky; top: 0; z-index: 1; background: var(--panel); color: var(--amber); font-weight: 600; text-align: right; padding: 6px; white-space: nowrap; border-bottom: 1px solid var(--line); }
+td { padding: 2px 6px; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--line-soft); }
+th.l, td.l { text-align: left; }
+.pool td { height: 48px; }
+tr.gone td { color: var(--faint); }
+.tog { width: 44px; height: 44px; background: transparent; border: 1px solid var(--line); color: var(--dim); font-weight: 700; padding: 0; }
+.tog.lock.on { background: var(--green); border-color: var(--green); color: var(--bg); }
+.tog.xcl { color: var(--red); }
+.tog.xcl.on { background: var(--red); border-color: var(--red); color: var(--bg); }
+.tog[aria-disabled="true"] { opacity: .35; cursor: not-allowed; }
+td input { width: 56px; height: 44px; padding: 0 4px; text-align: right; background: var(--raised); border: 1px solid var(--line); border-radius: 0; }
+td input[aria-disabled="true"] { opacity: .35; cursor: not-allowed; }
+.status-flag { color: var(--red); font-size: 12px; }
+.pool-tools { display: flex; flex-wrap: wrap; gap: 6px; padding-bottom: 8px; align-items: center; }
+.pool-tools button { min-height: 44px; min-width: 52px; background: var(--raised); border: 1px solid var(--line); color: var(--text); font-weight: 600; }
+.pool-tools button.on { background: var(--blue); border-color: var(--blue); color: var(--blue-ink); }
+.pool-tools input { flex: 1 1 160px; min-width: 0; min-height: 44px; padding: 0 8px; background: var(--raised); border: 1px solid var(--line); border-radius: 0; }
+.pool-tools .count { color: var(--dim); }
+
+/* ---------- lineup cards ---------- */
+.book-grid { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1100px) { .book-grid { grid-template-columns: minmax(0, 1fr) 300px; } }
+.summary { display: flex; flex-wrap: wrap; gap: 4px 18px; padding-bottom: 10px; color: var(--dim); }
+.summary b { color: var(--text); font-weight: 600; }
+.summary .pass { color: var(--green); font-weight: 600; }
+.summary .fail { color: var(--red); font-weight: 600; }
+.export { min-height: 44px; padding: 0 12px; background: transparent; border: 1px solid var(--line); color: var(--faint); font-weight: 600; cursor: not-allowed; margin-left: auto; }
+.cards { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); }
+.card { background: var(--panel); border: 1px solid var(--amber-line); min-width: 0; }
+.card-head { display: flex; justify-content: space-between; padding: 5px 8px; background: var(--amber-bar); border-bottom: 1px solid var(--amber-line); }
+.card-head b { color: var(--amber); font-weight: 600; }
+.card-tags { display: flex; flex-wrap: wrap; gap: 4px; padding: 5px 8px 0; min-height: 26px; }
+.tag { border: 1px solid var(--blue); color: var(--blue); padding: 0 5px; font-size: 12px; }
+.tag.plain { border-color: var(--line); color: var(--dim); }
+.seat { display: grid; grid-template-columns: 42px minmax(0, 1fr) 44px 44px 44px; gap: 4px; padding: 2px 8px; align-items: baseline; }
+.seat.head { color: var(--faint); font-size: 12px; }
+.seat > :nth-child(n+3) { text-align: right; }
+.seat .slot { color: var(--amber); }
+.seat .who { overflow-wrap: anywhere; }
+.seat .who small { color: var(--dim); font-size: 12px; margin-left: 4px; }
+.seat .pts { color: var(--green); }
+.card-foot { display: flex; justify-content: space-between; padding: 5px 8px; border-top: 1px solid var(--line-soft); margin-top: 3px; color: var(--dim); }
+.card-foot b { color: var(--yellow); font-weight: 600; }
+
+.rail { background: var(--panel); border: 1px solid var(--line); padding: 0 8px 8px; min-width: 0; }
+.rail-row { padding: 4px 0; border-bottom: 1px solid var(--line-soft); }
+.rail-top { display: flex; justify-content: space-between; gap: 8px; }
+.rail-top span:first-child { min-width: 0; overflow-wrap: anywhere; }
+.rail-top span:last-child { flex: none; color: var(--blue); font-weight: 600; }
+.bar { height: 4px; background: var(--line-soft); margin-top: 3px; }
+.bar i { display: block; height: 4px; background: var(--blue); }
+
+.empty { color: var(--dim); padding: 30px 12px; text-align: center; border: 1px dashed var(--line); }
+.drop { border: 1px dashed var(--amber-line); padding: 16px; text-align: center; color: var(--dim); }
+.drop b { display: block; color: var(--faint); font-weight: 700; }
+.swap-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 10px 0; }
+.swap-tools button { min-height: 44px; padding: 0 12px; background: transparent; border: 1px solid var(--line); color: var(--faint); font-weight: 600; cursor: not-allowed; }
+
+/* ---------- command line ---------- */
+.cmd { display: flex; flex-wrap: wrap; gap: 2px 10px; align-items: center; padding: 8px 12px; min-height: 44px; background: var(--panel); border-top: 1px solid var(--line); color: var(--faint); width: 100%; border-left: 0; border-right: 0; border-bottom: 0; text-align: left; cursor: not-allowed; }
+.cmd b { color: var(--amber); font-weight: 700; }
+
+/* ---------- "Demo only" ---------- */
+.toast { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); max-width: calc(100vw - 32px); background: var(--text); color: var(--bg); padding: 8px 14px; font-weight: 600; z-index: 10; pointer-events: none; }
+.toast[hidden] { display: none; }

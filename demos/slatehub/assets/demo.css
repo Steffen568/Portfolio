@@ -1,0 +1,62 @@
+/* Demo-only additions: banner, panel, sources overlay, phone layout, 44 px controls.
+   Same colors and fonts as the app. The app's own styles are untouched. */
+:root{color-scheme:dark;}
+/* Controls with no font of their own get the app's font, not the browser's Arial. */
+button,input,select,textarea{font-family:var(--font-ui);}
+
+#demo-banner{display:flex;align-items:center;flex-wrap:wrap;gap:6px 12px;padding:4px 14px;background:var(--s3,#0d1217);border-bottom:1px solid var(--border2,#232c38);font-family:var(--font-ui);font-size:12px;line-height:1.35;color:var(--text2,#c7d2dd);}
+#demo-banner > span:first-child{flex:1 1 220px;min-width:0;}
+.demo-banner-btns{display:flex;gap:6px;flex-wrap:wrap;}
+#demo-how-btn,#demo-how-close,#demo-sources-btn{min-height:44px;padding:0 14px;background:transparent;border:1px solid var(--blue,#60a5fa);border-radius:4px;color:var(--blue,#60a5fa);font-size:13px;font-weight:600;cursor:pointer;}
+#demo-sources-btn[aria-pressed="true"]{background:rgba(96,165,250,.15);}
+
+#demo-how{margin:auto;max-width:600px;width:calc(100% - 32px);max-height:calc(100dvh - 32px);overflow-y:auto;padding:20px;background:var(--surface,#07090c);color:var(--text2,#c7d2dd);border:1px solid var(--border3,#2f3a4a);border-radius:8px;font-family:var(--font-ui);font-size:14px;line-height:1.5;}
+#demo-how::backdrop{background:rgba(0,0,0,.7);}
+#demo-how h2{font-size:18px;color:var(--text,#f5f8fb);margin:0 0 10px;}
+#demo-how h3{font-size:14px;color:var(--text,#f5f8fb);margin:14px 0 4px;}
+#demo-how p{margin:0;}
+#demo-how-close{margin-top:16px;}
+
+/* Sources overlay: hidden until the banner toggle turns it on */
+.demo-src{display:none;margin:6px 8px;padding:6px 10px;border:1px dashed var(--blue,#60a5fa);border-radius:4px;background:rgba(96,165,250,.08);font-family:var(--font-ui);font-size:12px;line-height:1.4;color:var(--text2,#c7d2dd);text-align:left;text-transform:none;letter-spacing:0;font-weight:400;}
+.demo-src b{display:block;color:var(--blue,#60a5fa);font-weight:700;}
+.demo-src span{display:block;}
+body.demo-show-sources .demo-src{display:block;}
+.demo-gap{margin:6px 8px;padding:6px 10px;border-left:3px solid #f59e0b;background:rgba(245,158,11,.08);font-family:var(--font-ui);font-size:12px;line-height:1.4;color:var(--text2,#c7d2dd);text-transform:none;letter-spacing:0;}
+
+/* Closed drawers wait just off-screen; hide them so they cannot widen the page or be tabbed into. */
+.le-drawer:not(.open),.gl-drawer:not(.open),.hitter-gl-drawer:not(.open),.pitcher-gl-drawer:not(.open){visibility:hidden;}
+
+/* Every control at least 44 px tall: big enough for a thumb. */
+button,select,a.sh-tab,a[data-demo-off],input[type=text],input[type=number]{min-height:44px;}
+a[data-demo-off]:not(.sh-tab){display:inline-flex;align-items:center;}
+.le-close,.gl-close{min-width:44px;}
+/* Tap targets that are divs with a click handler: detail tabs, fold-open headers, arsenal rows. */
+.det-tab,.sec-hdr,.a-row,.park-bar-toggle{min-height:44px;box-sizing:border-box;}
+.det-tab{display:inline-flex;align-items:center;justify-content:center;min-width:44px;}
+.sec-hdr{display:flex;align-items:center;}
+#tourHelpBtn{min-width:44px;min-height:44px;}
+/* Room at the bottom so the floating ? button never sits on the last row. */
+body{padding-bottom:64px;}
+
+/* Phone and tablet: the app already stacks its columns below 900 px; let them shrink to the screen. */
+@media(max-width:900px){
+  .sh-topnav{overflow-x:auto;}
+  .slate-wrap{grid-template-columns:minmax(0,1fr);}
+  .lineup-col,.pitcher-col{min-width:0;}
+  .panel-hdr,.panel-hdr > div{flex-wrap:wrap;gap:6px;}
+}
+/* Phone: a batter row becomes three lines (name / five stats / matchup) instead of eight columns. */
+@media(max-width:600px){
+  .br-main{grid-template-columns:repeat(5,minmax(0,1fr));row-gap:6px;}
+  .br-order{grid-column:1;}
+  .br-id{grid-column:2 / -1;}
+  .br-matchup{grid-column:1 / -1;}
+  /* The bullpen table is wider than a phone: it scrolls sideways inside its own box. */
+  .bp-panel.active{overflow-x:auto;}
+  .bp-header,.bp-row{min-width:max-content;}
+}
+
+#demo-toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:100000;padding:10px 16px;background:var(--s3,#0d1217);border:1px solid var(--border3,#2f3a4a);border-radius:6px;color:var(--text,#f5f8fb);font-family:var(--font-ui);font-size:13px;opacity:0;pointer-events:none;transition:opacity .2s;}
+#demo-toast.show{opacity:1;}
+.demo-off{opacity:.55;cursor:not-allowed !important;}

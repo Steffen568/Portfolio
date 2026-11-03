@@ -1,0 +1,57 @@
+/* The demo's few differences from the real site's look (specs/portfolio-demo.md). */
+
+/* A thin bar that stays thin on a phone. The real banner is 16 px body text; this one is a label. */
+[data-concept-banner] {
+  font-size: 14px !important;
+  line-height: 1.3 !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+
+/* The bar is taller than the real banner on a phone, so jumps stop lower. */
+html {
+  scroll-padding-top: 136px;
+}
+
+/* Everything is visible on load: the real site's fade as you scroll is off. */
+.rv {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* The side panel hides this line break, which would run "Welcome to" into the name (STATUS.md Proposed). */
+.side-title br {
+  display: inline !important;
+}
+
+[data-demo-off],
+[data-demo-only] {
+  cursor: not-allowed !important;
+}
+
+[data-demo-only] {
+  outline: 1px dashed rgba(14, 26, 36, 0.45);
+  outline-offset: -4px;
+}
+
+[data-demo-toast] {
+  position: fixed;
+  z-index: 100;
+  left: 50%;
+  bottom: 76px;
+  transform: translateX(-50%);
+  max-width: calc(100vw - 32px);
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: #e8edf1;
+  color: #0e1a24;
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+}
+
+[data-demo-toast][hidden] {
+  display: none;
+}

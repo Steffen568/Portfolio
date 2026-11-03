@@ -114,7 +114,10 @@ test('nothing dev-only is committed', () => {
 test('no committed file holds a key, token or password', () => {
   const PATTERNS = [
     /\bsk-[A-Za-z0-9_-]{20,}/, /\b(ghp|gho|ghs|ghu)_[A-Za-z0-9]{30,}/, /\bgithub_pat_[A-Za-z0-9_]{30,}/, /\bAKIA[0-9A-Z]{16}\b/,
-    /-----BEGIN [A-Z ]*PRIVATE KEY-----/, /\b(password|passwd|api[_-]?key|secret[_-]?key|access[_-]?token)\s*[:=]\s*['"]?[^\s'"]{6,}/i
+    /-----BEGIN [A-Z ]*PRIVATE KEY-----/,
+    // A name with a written-out value. Minified demo code's `password:!0`, `accessToken:null`, `{accessToken:p}=…` are not values.
+    /\b(password|passwd|api[_-]?key|secret[_-]?key|access[_-]?token)['"]?\s*[:=]\s*['"]?(?!(?:null|true|false|undefined|void)\b|![01]\b|[A-Za-z_$][\w$]{0,2}[})\],;])[^\s'"]{6,}/i,
+    /^\s*(export\s+)?[A-Za-z0-9_]*(password|api_key|secret|token)[A-Za-z0-9_]*\s*=\s*[^\s#]{6,}/i
   ];
   const hits = [];
   for (const f of TRACKED.filter(isText)) {

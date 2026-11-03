@@ -1,0 +1,103 @@
+/* The demo's own pieces (specs/portfolio-demo.md): the bar, the About panel, the disabled messages. The colors
+   and fonts are the site's tokens from global.css. The bar sits in the page's flow, so it covers nothing; the
+   site's fixed header starts below it and slides up to the top as the bar scrolls away (demo.js). */
+.hdr {
+  top: var(--demo-top, 0);
+}
+/* Home's hero fills the first screen down to the pinned buttons (global.css); the bar takes its share of that
+   room from the photo, so the words stay clear of the buttons. */
+.hero {
+  min-height: max(680px, calc(100svh - var(--demo-bar, 0px)));
+}
+@media (max-width: 760px) {
+  .hero {
+    min-height: calc(100svh - 74px - var(--demo-bar, 0px));
+  }
+}
+/* Nothing waits behind a scroll: every reveal is finished on load (the site's own no-motion rules for these). */
+.split .w > span,
+.rv,
+.lr {
+  transform: none !important;
+  opacity: 1 !important;
+  transition: none !important;
+}
+/* On a phone a tab scrolls its panel to the top of the screen: this keeps the heading clear of the header. */
+#p-info,
+#p-visit,
+#p-apply {
+  scroll-margin-top: 72px;
+}
+/* The message floats over the page: a tap goes through it to whatever is underneath. */
+.demo-toast {
+  pointer-events: none;
+}
+.demo-bar {
+  position: relative;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 16px;
+  background: var(--navy-deep);
+  color: #faf8f2;
+  border-bottom: 1px solid var(--gold);
+}
+.demo-bar-text {
+  margin: 0;
+  padding: 6px 0;
+  font: 600 12px/1.35 var(--sans);
+}
+.demo-bar-about {
+  flex: none;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--gold);
+  font: 700 12px/1.2 var(--sans);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.demo-about {
+  width: min(560px, calc(100% - 32px));
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 26px 24px 22px;
+  overflow: auto;
+  border: 0;
+  border-top: 4px solid var(--gold);
+  background: #faf8f2;
+  color: var(--navy);
+  box-shadow: 0 24px 50px rgba(13, 24, 48, 0.35);
+  font: 400 16px/1.55 var(--sans);
+}
+.demo-about::backdrop {
+  background: rgba(13, 24, 48, 0.55);
+}
+.demo-about h2 {
+  margin: 0 0 12px;
+  font: 600 30px/1.1 var(--display);
+  color: var(--navy);
+}
+.demo-about p {
+  margin: 0 0 14px;
+}
+.demo-about-line {
+  font-weight: 700;
+}
+.demo-about-close {
+  min-height: 44px;
+  padding: 0 22px;
+  border: 1.5px solid var(--navy);
+  background: none;
+  color: var(--navy);
+  font: 700 15px var(--sans);
+  cursor: pointer;
+}
+[data-demo-off],
+[data-demo-only] {
+  cursor: not-allowed;
+}

@@ -12,7 +12,7 @@ Ceiling: 60 lines (`scripts/verify.sh`). History goes to `docs/history/` the day
 | Setup | CLAUDE.md, SCOPE.md, STATUS.md rewritten for the redesign; `specs/portfolio-site.md` and `specs/01-shell-header.md` written 2026-11-03. |
 | Units | **Units 01–05 Checked** 2026-11-03 (unit 05 found no page defect; no page file changed). At 1440×900 the header, the environment window and all four sports cards fit (cards end ~832 px). Detail: `docs/history/2026-11-03-unit-0*.md`. |
 | Demos | None copied into `demos/` yet: every card shows the striped placeholder. |
-| Publish | Not started (unit 06). |
+| Publish | **Unit 06 Checked** 2026-11-03: the committed files alone load the page under `/portfolio/` with exact-case names, nothing dev-only or secret ships. **Not live yet:** waits on Steffen (GitHub username, go-ahead, Pages setting). Until demos are copied in, the five demo buttons lead to GitHub's "not found" page. |
 
 ## Units
 | # | Unit | Spec | Build | Checked (Rule 15) | Done (stranger's phone) |
@@ -22,7 +22,7 @@ Ceiling: 60 lines (`scripts/verify.sh`). History goes to `docs/history/` the day
 | 03 | Cards + connectors | ✅ 2026-11-03 | ✅ 2026-11-03 (verify 77/77; 6 breaks caught) | ✅ 2026-11-03 (review 4: zero lines) | — |
 | 04 | Skills + panel | ✅ 2026-11-03 | ✅ 2026-11-03 (verify 102/102; 3 breaks caught) | ✅ 2026-11-03 (review 1: zero lines) | — |
 | 05 | Phone pass + quality standard | ✅ 2026-11-03 | ✅ 2026-11-03 (verify 125/125; 7 breaks caught) | ✅ 2026-11-03 (review 3: zero lines) | — |
-| 06 | Publish (GitHub Pages) | — | — | — | — |
+| 06 | Publish (GitHub Pages) | ✅ 2026-11-03 | ✅ 2026-11-03 (verify 132/132; 3 breaks caught; not pushed) | ✅ 2026-11-03 (review 2: zero lines) | — |
 
 ## Proposed changes (Steffen decides)
 1. **Skill buttons below 44 px: decided 2026-11-03, keep the design (32 px desktop, 40 px phones).** Steffen's answer; the named exception to the 44 px rule for this row. Unit 04's spec records it.
@@ -38,8 +38,9 @@ Ceiling: 60 lines (`scripts/verify.sh`). History goes to `docs/history/` the day
 **Test corrected (Rule 13, for Steffen to see):** unit 01's scanline check compared the overlay with the full window; the reserved scrollbar strip can't be covered, so it now compares with a full-screen fixed layer. The page was not changed. **Unit 02, same cause:** its 390 px full-bleed check first compared with `clientWidth`, which counts that strip (390 vs a usable 375); it now uses the same fixed-layer measurement. Page unchanged. **Unit 03, superseded by unit 04:** its check "a card click opens nothing yet" was written to expire when the panel arrived; it now checks that each click opens only that card's panel (44 px and no-error checks kept).
 
 ## Failing checks
-None. `npm run verify` 125/125 (1.2 min, over the 60 s target).
+None. `npm run verify` 132/132 (1.2 min, over the 60 s target).
 
 ## Next
 1. Steffen reads `screenshots/01-…` to `05-phone-quality/`, and reads the graphic on a real phone (Proposed change 5).
-2. Unit 06 (publish) in a new session: needs Steffen's GitHub username and his go-ahead to push.
+2. Publish: Steffen creates the public `portfolio` repo on github.com and gives his username + go-ahead; the session pushes `main`; Steffen sets Pages (main, root); live screenshots go in `screenshots/06-publish/`.
+3. The stranger's-phone test on the live link (spec 06 line 10).

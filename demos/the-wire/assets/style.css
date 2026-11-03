@@ -216,13 +216,13 @@ section.sr-team { margin: 18px 0 0 !important; }
 .out b { color: var(--strong); font-size: 13px; }
 .out small { color: var(--label); font-size: 10px; letter-spacing: .08em; margin-left: 4px; }
 .out p { font-family: var(--read); font-size: 15px; line-height: 1.5; margin: 2px 0 0; color: var(--prose-ink); }
-.legend { margin-top: 18px; border: 1px solid var(--line-2); padding: 10px; }
-.legend h3 { font-size: 11px; letter-spacing: .12em; color: var(--gold); margin: 0 0 8px; }
-.legend .lr { margin: 0 0 8px; }
-.legend .sw { display: inline-flex; gap: 2px; margin-right: 6px; vertical-align: middle; }
-.legend .sw i { display: inline-block; width: 16px; height: 12px; border: 1px solid var(--line); }
-.legend b { font-size: 11px; color: var(--ink); letter-spacing: .06em; }
-.legend p { font-family: var(--read); font-size: 13px; color: var(--dim); margin: 2px 0 0; line-height: 1.45; }
+.pipe .legend { margin-top: 18px; border: 1px solid var(--line-2); padding: 10px; }
+.pipe .legend h3 { font-size: 11px; letter-spacing: .12em; color: var(--gold); margin: 0 0 8px; }
+.pipe .legend .lr { margin: 0 0 8px; }
+.pipe .legend .sw { display: inline-flex; gap: 2px; margin-right: 6px; vertical-align: middle; }
+.pipe .legend .sw i { display: inline-block; width: 16px; height: 12px; border: 1px solid var(--line); }
+.pipe .legend b { font-size: 11px; color: var(--ink); letter-spacing: .06em; }
+.pipe .legend p { font-family: var(--read); font-size: 13px; color: var(--dim); margin: 2px 0 0; line-height: 1.45; }
 .sh1 { background: var(--sh1); } .sh2 { background: var(--sh2); } .sh3 { background: var(--sh3); } .vol { background: var(--vol); }
 .pos2 { background: var(--pos2); } .pos1 { background: var(--pos1); } .mid { background: var(--mid); } .neg1 { background: var(--neg1); } .neg2 { background: var(--neg2); }
 .raw.pos2 { background: var(--rpos2); } .raw.pos1 { background: var(--rpos1); } .raw.mid { background: var(--rmid); } .raw.neg1 { background: var(--rneg1); } .raw.neg2 { background: var(--rneg2); }
@@ -240,4 +240,24 @@ section.sr-team { margin: 18px 0 0 !important; }
   .brow { font-size: 11px; }
   .bar { gap: 2px; } .bar em { width: 18px; font-size: 10px; }
   .tab { font-size: 11px; letter-spacing: .03em; }
+}
+
+/* The Black Board. board.css is the real tool's own sheet, dark as the tool is; the demo adds only
+   its font, tap sizes and phone fit. */
+.board-wrap .bb { font-family: var(--mono); padding: 12px 10px 28px; margin: 14px 0 0; }
+.board-wrap .bb button.dhead, .board-wrap .bb button.band { min-height: 44px; }
+.board-wrap .bb .demo-only { color: #a39f94; }
+.board-wrap .bb .pname-demo { color: #e5b73b; font-weight: 700; }
+.board-wrap .bb [hidden] { display: none; }
+/* The board's own colors are the dark theme's in either browser setting. */
+.board-wrap {
+  --bg: #0e0d0b; --panel: #161512; --line: #26241f; --ink: #e6e2d6; --dim: #a29d8f; --label: #8f8a7d;
+  --gold: #f6c945; --volume: #35d07f; --efficiency: #e8a53a; --context: #4fa8e8; --quality: #f0654a;
+}
+/* The board's four-wide legend and three-wide game states have no breakpoint in the tool. */
+@media (max-width: 1100px) { .board-wrap .bb .legend { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) {
+  .board-wrap .bb .legend, .board-wrap .bb .row3 { grid-template-columns: 1fr; }
+  /* Its tables are fixed-layout at full width; on a phone they keep a readable width and scroll in their box. */
+  .board-wrap .bb .tbl { min-width: 640px; }
 }

@@ -3,7 +3,7 @@
 (function () {
   "use strict";
   var D = window.WIRE_DATA;
-  var state = { view: "worksheet", game: 0, team: 0 };
+  var state = { view: "board", game: 0, team: 0 };
   var root = document.getElementById("app");
 
   /** A DOM builder. Text always goes in as text, never as markup. */
@@ -281,7 +281,7 @@
     var other = stated.filter(function (l) { return l.team_id !== g.table.away_team_id && l.team_id !== g.table.home_team_id; });
     return [
       h("p", { class: "sr-hint" }, "Every sentence here is a fixed template filled by code. None says what to do about it."),
-      h("p", { class: "sr-hint" }, "Built " + builtOn() + ". The worksheet's market table holds the last line stored after that, so its spread and total can differ from the table here."),
+      h("p", { class: "sr-hint" }, "Built " + builtOn() + ", from the betting lines stored that day; the worksheet's market table reads the same lines."),
       gameTabs("lines", D["fact-lines"], function (x) { return x.lines.filter(function (l) { return !l.absence; }).length + " LINES · " + x.slots.filter(function (s) { return s.filled; }).length + " OF " + x.slots.length + " SLOTS"; }),
       briefTable(g),
       h("div", { class: "kick" }, "WRITTEN SECTIONS"),
@@ -358,6 +358,36 @@
     ];
   }
 
+  // ---- black board ----
+  // The real board's own markup, drawn by `ScreenPanel.tsx` at build time (board.mjs) and kept as
+  // markup because the component reads raw SIS rows. Built once, so open sections stay open.
+  var boardNode = null;
+  function setOpen(btn, open) {
+    var body = btn.nextElementSibling;
+    if (open) body.removeAttribute("hidden"); else body.setAttribute("hidden", "hidden");
+    btn.setAttribute("aria-expanded", String(open));
+    var t = btn.firstChild;
+    if (t && t.nodeType === 3) t.nodeValue = t.nodeValue.replace(/^(\s*)[▾▸]/, "$1" + (open ? "▾" : "▸"));
+    if (btn.title) btn.title = btn.title.replace(/^(Close|Open)/, open ? "Close" : "Open");
+  }
+  function blackBoard() {
+    if (!boardNode) {
+      var tpl = document.createElement("template");
+      tpl.innerHTML = D.board.html;
+      boardNode = tpl.content.firstElementChild;
+      boardNode.querySelectorAll("button.dhead, button.band").forEach(function (b) {
+        if (!b.nextElementSibling) return;
+        setOpen(b, !b.dataset.demoClosed);
+        b.addEventListener("click", function () { setOpen(b, b.nextElementSibling.hasAttribute("hidden")); });
+      });
+    }
+    return [
+      h("p", { class: "sr-hint" }, h("b", null, "The board the tool opens on."), " Every game on the slate, read from the top down: how the game is likely to go, each team's pace and efficiency, then each unit and its players. Each figure is colored by what kind of number it is, as the legend says."),
+      h("p", { class: "sr-hint" }, "Drawn by the tool's own board code when this snapshot was saved. Player cards, stances, game notes and the rebuild buttons are off. No projection file is loaded, so the projection and ownership columns are left out; salaries are DraftKings' own."),
+      h("div", { class: "board-wrap" }, boardNode)
+    ];
+  }
+
   // ---- page ----
   function tab(view, label) {
     return h("button", { class: state.view === view ? "tab on" : "tab", "aria-pressed": String(state.view === view), onclick: function () { go(view); } }, label);
@@ -373,8 +403,8 @@
         h("h1", { class: "title" }, "THE WIRE"),
         h("p", { class: "what" }, "For one fantasy contest's games, this research tool lines up each offense against the defense it faces, lists where that defense gives up more than its own average and where it holds firm, and names the players involved."),
         h("p", { class: "gloss" }, "A DraftKings slate is the set of games one daily fantasy contest covers. This one has " + D.meta.games.length + " games, " + D.meta.counts.findings + " findings, " + D.meta.counts.players + " player blocks and " + D.meta.counts.fact_lines + " fact lines."),
-        h("div", { class: "tabs" }, tab("worksheet", "GAP WORKSHEET"), tab("lines", "FACT LINES"), tab("pipeline", "PIPELINE")),
-        state.view === "worksheet" ? worksheet() : state.view === "lines" ? factLines() : pipeline())
+        h("div", { class: "tabs" }, tab("board", "BLACK BOARD"), tab("worksheet", "GAP WORKSHEET"), tab("lines", "FACT LINES"), tab("pipeline", "PIPELINE")),
+        state.view === "board" ? blackBoard() : state.view === "worksheet" ? worksheet() : state.view === "lines" ? factLines() : pipeline())
     ]);
   }
   draw();

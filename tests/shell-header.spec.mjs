@@ -1,5 +1,6 @@
 // Unit 01 — Shell + header. Each test names the spec line it guards (specs/01-shell-header.md).
 import { test, expect } from '@playwright/test';
+import { withCopyChanges } from './copy-changes.mjs';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -11,7 +12,7 @@ function designData() {
   const src = DESIGN.split(/<script type="text\/x-dc"[^>]*>/)[1].split('</script>')[0];
   const Component = new Function('DCLogic', src + '\nreturn Component;')(class {});
   const c = new Component();
-  return { skills: c.skillList(), projects: c.projects() };
+  return { skills: c.skillList(), projects: withCopyChanges(c.projects()) };
 }
 // The design's markup text for one element, by its opening tag.
 const designText = (open, close) => DESIGN.split(open)[1].split(close)[0];

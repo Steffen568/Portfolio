@@ -1,5 +1,6 @@
 // Unit 04 — Skills + panel. Each test names the spec line it guards (specs/04-skills-panel.md).
 import { test, expect } from '@playwright/test';
+import { withCopyChanges } from './copy-changes.mjs';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -13,7 +14,7 @@ function designData() {
   const src = DESIGN.split(/<script type="text\/x-dc"[^>]*>/)[1].split('</script>')[0];
   const Component = new Function('DCLogic', src + '\nreturn Component;')(class {});
   const c = new Component();
-  return { skills: c.skillList(), projects: c.projects() };
+  return { skills: c.skillList(), projects: withCopyChanges(c.projects()) };
 }
 const { skills: SKILLS, projects: PROJECTS } = designData();
 const has = (p, k) => p.skills.some((x) => x[0] === k);

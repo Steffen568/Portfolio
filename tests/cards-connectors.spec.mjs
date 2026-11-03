@@ -1,5 +1,6 @@
 // Unit 03 — Cards + connectors. Each test names the spec line it guards (specs/03-cards-connectors.md).
 import { test, expect } from '@playwright/test';
+import { withCopyChanges } from './copy-changes.mjs';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -16,7 +17,7 @@ function designData() {
   const src = DESIGN.split(/<script type="text\/x-dc"[^>]*>/)[1].split('</script>')[0];
   const Component = new Function('DCLogic', src + '\nreturn Component;')(class {});
   const c = new Component();
-  return { skills: c.skillList(), projects: c.projects() };
+  return { skills: c.skillList(), projects: withCopyChanges(c.projects()) };
 }
 
 // The usable viewport width (not clientWidth, which counts the reserved scrollbar strip; see unit 02).

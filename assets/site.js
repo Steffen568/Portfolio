@@ -106,4 +106,127 @@
       showWin(imgWin, b);
     });
   });
+
+  // Project cards, built from the data as the design's card() does: sports tools two each side, websites centered below.
+  // Stagger: 0.5 s + 0.12 s per card; left cards spawn from +30 px, right from −30 px, websites in place.
+  var label = {};
+  P.skills.forEach(function (k) { label[k.id] = k.label; });
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  var data = P.projects.filter(function (p) { return p.group === 'data'; });
+  [
+    [document.querySelector('.col-main:not(.col-r) .grid1'), data.slice(0, 2), '30px', 0],
+    [document.querySelector('.col-r .grid1'), data.slice(2), '-30px', 2],
+    [document.querySelector('.web-row .grid-web'), P.projects.filter(function (p) { return p.group === 'web'; }), '0px', 4]
+  ].forEach(function (place) {
+    place[1].forEach(function (p, i) {
+      var b = el('button', 'card');
+      b.type = 'button';
+      b.dataset.card = p.id;
+      b.style.cssText = '--fx: ' + place[2] + '; animation-delay: ' + (0.5 + (place[3] + i) * 0.12).toFixed(2) + 's';
+      b.setAttribute('aria-label', p.name + ': ' + p.line);
+      var thumb = el('span', 'thumb');
+      thumb.append(el('b', null, p.tkr), el('span', null, 'SCREENSHOT PENDING'));
+      var st = el('span', 'st' + (p.wip ? ' wip' : ''));
+      st.append(el('i'), p.status);
+      var top = el('span', 'card-t');
+      top.append(el('b', null, p.name), st);
+      var chips = el('span', 'chips');
+      p.skills.forEach(function (x) { chips.appendChild(el('span', 'chip', label[x[0]])); });
+      var body = el('span', 'card-b');
+      body.append(top, el('p', null, p.line), chips);
+      b.append(el('span', 'go', 'OPEN ▸'), thumb, body);
+      place[0].appendChild(b);
+    });
+  });
+
+  // Hover or focus: the card and its line light up (.on) and the name scrambles for 380 ms (the design's scr() and tick()).
+  // The lines are in the design's project order. No scramble under reduced motion.
+  var lineFor = {};
+  var lines = document.querySelectorAll('svg.lines .ln');
+  P.projects.forEach(function (p, i) { lineFor[p.id] = lines[i]; });
+  var G = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&*+=<>/';
+  var sc = null, iv = null, hov = null; // one card on at a time, as the design's hov
+  function off(card) {
+    card.classList.remove('on');
+    lineFor[card.dataset.card].classList.remove('on');
+    if (hov === card) hov = null;
+  }
+  function scr(text, t0, now) {
+    var p = (now - t0) / 380;
+    if (p >= 1) return text;
+    var n = Math.floor(Math.max(0, p) * text.length);
+    var o = text.slice(0, n);
+    for (var i = n; i < text.length; i++) o += text[i] === ' ' ? ' ' : G[Math.floor(Math.random() * G.length)];
+    return o;
+  }
+  function step() {
+    var now = Date.now();
+    sc.el.textContent = scr(sc.name, sc.t0, now);
+    if (now - sc.t0 > 420) { clearInterval(iv); iv = null; }
+  }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var p = P.projects.find(function (x) { return x.id === card.dataset.card; });
+    function enter() {
+      if (hov === card) return;
+      if (hov) off(hov);
+      hov = card;
+      card.classList.add('on');
+      lineFor[p.id].classList.add('on');
+      if (still.matches) return;
+      if (sc && sc.el !== card.querySelector('.card-t > b')) sc.el.textContent = sc.name;
+      sc = { el: card.querySelector('.card-t > b'), name: p.name, t0: Date.now() };
+      step();
+      if (!iv) iv = setInterval(step, 33);
+    }
+    function leave() { if (hov === card) off(card); }
+    card.addEventListener('pointerenter', enter);
+    card.addEventListener('pointerleave', leave);
+    card.addEventListener('focus', enter);
+    card.addEventListener('blur', leave);
+    card.addEventListener('animationend', function (e) { if (e.animationName === 'spawn') measure(); });
+  });
+
+  // Connector lines, the design's measure(): right-angled paths from the environment window to each card, in stage
+  // coordinates. Measured on load, on resize, after fonts load, and again as each card lands (the design misses that).
+  // A hovered or focused card is lifted 3 px; its current lift is taken out so the line lands on the resting card.
+  var stage = document.querySelector('.stage'), fwin = document.querySelector('[data-eng] .fwin');
+  function resting(card) {
+    var b = card.getBoundingClientRect(), m = new DOMMatrixReadOnly(getComputedStyle(card).transform);
+    return { left: b.left - m.e, right: b.right - m.e, top: b.top - m.f, bottom: b.bottom - m.f, width: b.width, height: b.height };
+  }
+  function measure() {
+    var wide = window.innerWidth > 1000;
+    var sr = stage.getBoundingClientRect(), fr = fwin.getBoundingClientRect();
+    P.projects.forEach(function (p) {
+      var d = 'M0 0';
+      var r = resting(document.querySelector('[data-card="' + p.id + '"]'));
+      if (!wide) {
+        // no lines at 1000 px and below
+      } else if (r.top > fr.bottom) {
+        var tx = r.left + r.width / 2 - sr.left, ty = r.top - sr.top;
+        var sx = Math.max(fr.left + 60, Math.min(fr.right - 60, r.left + r.width / 2)) - sr.left, sy = fr.bottom - sr.top;
+        var my = (sy + ty) / 2;
+        d = 'M' + sx.toFixed(1) + ' ' + sy.toFixed(1) + ' V' + my.toFixed(1) + ' H' + tx.toFixed(1) + ' V' + ty.toFixed(1);
+      } else {
+        var left = r.right < fr.left;
+        var ty2 = r.top + Math.min(r.height * 0.3, 70) - sr.top;
+        var tx2 = (left ? r.right : r.left) - sr.left;
+        var sx2 = (left ? fr.left : fr.right) - sr.left;
+        var sy2 = Math.max(fr.top - sr.top + 50, Math.min(fr.bottom - sr.top - 50, ty2));
+        var mx = left ? (tx2 + sx2) / 2 : (sx2 + tx2) / 2;
+        d = 'M' + sx2.toFixed(1) + ' ' + sy2.toFixed(1) + ' H' + mx.toFixed(1) + ' V' + ty2.toFixed(1) + ' H' + tx2.toFixed(1);
+      }
+      lineFor[p.id].setAttribute('d', d);
+    });
+  }
+  measure();
+  window.addEventListener('resize', measure);
+  setTimeout(measure, 60);
+  setTimeout(measure, 700);
+  try { if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure); } catch (e) {}
 })();

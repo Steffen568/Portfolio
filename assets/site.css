@@ -34,7 +34,7 @@ button{font:inherit;color:inherit}
 .btn.green:hover{background:#8fd47c;color:#050403;box-shadow:0 0 22px -4px var(--grn)}
 .btn[disabled]{opacity:.5;cursor:not-allowed}
 
-/* skills: in the bio (the filter and chips arrive in unit 04) */
+/* skills: in the bio and on every card (the filter arrives in unit 04) */
 .skl{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
 .sk{display:inline-flex;align-items:center;gap:7px;min-height:32px;padding:0 10px;border:1px solid var(--ln2);border-radius:3px;background:#0e0b08;color:var(--tx);font-size:11px;letter-spacing:.08em;cursor:pointer;transition:border-color .15s,background .15s,color .15s,transform .15s}
 .sk i{font-style:normal;font-size:10px;color:var(--dim)}
@@ -42,14 +42,60 @@ button{font:inherit;color:inherit}
 .sk:hover i,.sk.on i{color:#050403}
 .skl-def{min-height:18px;font-size:11.5px;line-height:1.45;color:var(--mu)}
 .skl-def b{color:var(--acc);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px}
+.chip{display:inline-flex;align-items:center;min-height:20px;padding:0 6px;border:1px solid #4a3a20;border-radius:2px;font-size:9.5px;letter-spacing:.08em;color:#d9a55a;white-space:nowrap;transition:background .15s,color .15s}
 
 /* footer */
 .ft{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;padding:14px 0 22px;border-top:1px solid var(--ln);font-size:10.5px;letter-spacing:.1em;color:var(--dim)}
 
-/* stage: the environment in the middle (the side columns, cards and lines arrive in unit 03) */
+/* stage: the environment in the middle, projects spawn out */
 .stage{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(440px,580px) minmax(0,1fr);gap:30px;align-items:start;padding:16px 0 18px}
+.lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:0}
+.ln{fill:none;stroke:#6a5228;stroke-width:1.5;stroke-dasharray:5 8;animation:dflow 1.2s linear infinite,lnin .8s ease-out .3s backwards;transition:stroke .2s}
+.ln.on{stroke:var(--acc);stroke-width:2;animation-duration:.5s,.8s}
 @keyframes dflow{to{stroke-dashoffset:-26}}
-@media (min-width:1001px){.stage > .eng{grid-column:2}} /* until unit 03 adds the side columns */
+@keyframes lnin{from{opacity:0}}
+.col{position:relative;z-index:1;display:flex;flex-direction:column;gap:12px;min-width:0}
+.col-h{display:flex;align-items:baseline;justify-content:space-between;gap:8px;border-bottom:1px dotted var(--ln2);padding-bottom:6px}
+.col-h b{font-size:12px;letter-spacing:.16em;color:var(--acc)}
+.col-main .col-h b{font-size:15px}
+.col-main .col-h{border-bottom-color:#6a5228}
+.grid1{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.col-main .grid1{gap:12px;flex:1;grid-template-rows:1fr 1fr}
+.col-main .card-b{flex:1}
+.stage > .col-main{align-self:stretch}
+.col-main .thumb{aspect-ratio:5/2}
+.col-h-r{flex-direction:row-reverse}
+.web-row{grid-column:1 / -1;margin-top:8px}
+.web-row .col-h{justify-content:center;gap:14px}
+.grid-web{display:grid;grid-template-columns:repeat(2,minmax(0,calc((100% - 640px) / 2)));justify-content:center;gap:30px}
+.web-row .thumb{aspect-ratio:21/9}
+
+.card{position:relative;display:flex;flex-direction:column;text-align:left;padding:0;border:1px solid var(--ln2);background:#0b0906;border-radius:4px;cursor:pointer;overflow:hidden;transition:border-color .2s,box-shadow .2s,transform .2s;animation:spawn .6s cubic-bezier(.2,.8,.2,1) backwards}
+.card:hover,.card.on{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc),0 10px 40px -14px var(--acc);transform:translateY(-3px)}
+.card::before,.card::after{content:'';position:absolute;width:10px;height:10px;border-color:var(--acc);border-style:solid;opacity:0;transition:opacity .2s,transform .2s;z-index:2}
+.card::before{left:-1px;top:-1px;border-width:2px 0 0 2px;transform:translate(4px,4px)}
+.card::after{right:-1px;bottom:-1px;border-width:0 2px 2px 0;transform:translate(-4px,-4px)}
+.card:hover::before,.card.on::before,.card:hover::after,.card.on::after{opacity:1;transform:none}
+.thumb::after{content:'';position:absolute;left:0;right:0;top:-30%;height:30%;background:linear-gradient(180deg,transparent,rgba(255,160,40,.16),transparent);opacity:0;pointer-events:none}
+.card:hover .thumb::after,.card.on .thumb::after{opacity:1;animation:sweep 1.1s ease-in-out infinite}
+@keyframes sweep{from{top:-30%}to{top:100%}}
+.card:hover .thumb b,.card.on .thumb b{opacity:1;text-shadow:0 0 14px rgba(255,160,40,.5)}
+@keyframes spawn{from{opacity:0;transform:translateX(var(--fx,0)) scale(.96)}}
+.thumb{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;aspect-ratio:2/1;border-bottom:1px solid var(--ln2);background:repeating-linear-gradient(135deg,rgba(255,160,40,.05) 0 10px,transparent 10px 22px),#0e0b08}
+.thumb b{font-family:'VT323',ui-monospace,monospace;font-weight:400;font-size:44px;line-height:.9;color:var(--acc);opacity:.85}
+.thumb span{font-size:10px;letter-spacing:.08em;color:var(--dim)}
+.card-b{display:flex;flex-direction:column;gap:4px;padding:9px 12px 10px}
+.card-t{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.card-t b{font-size:13.5px;font-weight:700;letter-spacing:.04em;color:var(--tx)}
+.card-b p{margin:0;font-size:12px;line-height:1.45;color:var(--mu)}
+.st{display:inline-flex;align-items:center;gap:5px;flex:none;font-size:9.5px;font-weight:700;letter-spacing:.1em;color:var(--grn)}
+.st i{width:6px;height:6px;border-radius:50%;background:var(--grn);box-shadow:0 0 8px var(--grn)}
+.st.wip{color:var(--org)}
+.st.wip i{background:var(--org);box-shadow:none}
+.card .go{position:absolute;right:10px;top:10px;z-index:3;transform:translateX(6px);transition:opacity .15s,transform .15s;font-size:10.5px;font-weight:700;letter-spacing:.1em;color:#050403;background:var(--acc);padding:4px 8px;border-radius:2px;opacity:0;transition:opacity .15s}
+.card:hover .go,.card.on .go{opacity:1;transform:none}
 
 /* the environment: walls, guards, one loop, a mistake log */
 .eng{position:relative;z-index:1;min-width:0}
@@ -190,6 +236,25 @@ button{font:inherit;color:inherit}
   .eng{margin:0 -14px;width:auto;max-width:none}
   .fwin{border-radius:0;border-left:0;border-right:0}
   .fw2{padding:8px 0 0}
+}
+
+/* phone + tablet: the cards, down one stem */
+@media (max-width:1000px){
+  .lines{display:none}
+  .col{padding-left:16px;border-left:2px dashed #4a3a20}
+  .card{--fx:0px !important}
+  .col-main .grid1{grid-template-rows:none}
+  .col-main .card-b{flex:none}
+  .col-r .col-h{display:none}
+  .col-r{margin-top:-10px}
+  .web-row{margin-top:0}
+  .web-row .col-h{justify-content:space-between}
+  .grid-web{grid-template-columns:minmax(0,1fr);gap:14px}
+}
+@media (max-width:640px){
+  .grid2{grid-template-columns:minmax(0,1fr)}
+  .card .thumb{aspect-ratio:21/9}
+  .card .thumb b{font-size:34px}
 }
 
 /* phone: header + skills */

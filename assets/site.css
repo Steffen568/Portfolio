@@ -44,6 +44,14 @@ button{font:inherit;color:inherit}
 .skl-def b{color:var(--acc);font-weight:600}
 .chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px}
 .chip{display:inline-flex;align-items:center;min-height:20px;padding:0 6px;border:1px solid #4a3a20;border-radius:2px;font-size:9.5px;letter-spacing:.08em;color:#d9a55a;white-space:nowrap;transition:background .15s,color .15s}
+.chip.on{background:var(--acc);border-color:var(--acc);color:#050403;font-weight:700}
+.card.dim{opacity:.32;transform:none;box-shadow:none}
+.card.hit{border-color:var(--acc)}
+.proof{display:flex;flex-direction:column;gap:7px;padding-top:4px;border-top:1px dotted var(--ln2)}
+.pf{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:baseline}
+.pf .chip{justify-content:center;min-width:118px}
+.pf > span:last-child{font-size:12px;line-height:1.45;color:var(--tx)}
+@media (max-width:640px){.pf{grid-template-columns:minmax(0,1fr);gap:3px}.pf .chip{justify-self:start;min-width:0}}
 
 /* footer */
 .ft{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;padding:14px 0 22px;border-top:1px solid var(--ln);font-size:10.5px;letter-spacing:.1em;color:var(--dim)}
@@ -218,6 +226,13 @@ button{font:inherit;color:inherit}
 .x{min-height:34px;min-width:44px;padding:0 12px;border:0;background:#050403;color:var(--acc);font-size:11px;font-weight:700;letter-spacing:.08em;cursor:pointer}
 .x:hover{color:#fff}
 .wb{flex:1;min-height:0;overflow:auto;padding:16px}
+.pgrid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:20px;align-items:start}
+.pthumb{aspect-ratio:16/10;border:1px solid var(--ln2)}
+.pthumb b{font-size:72px}
+.pinfo{display:flex;flex-direction:column;gap:12px;min-width:0}
+.pinfo h2{margin:0;font-size:46px;line-height:.85;color:var(--acc)}
+.pinfo .one{font-size:14.5px;font-weight:600;line-height:1.4;color:var(--tx)}
+.pinfo p{margin:0;font-size:13px;line-height:1.6;color:var(--mu)}
 .x{min-height:44px} /* deviation: 44 px tap target (quality standard); the design's 34 px is in STATUS.md */
 .imgfit{display:block;max-width:100%;max-height:calc(100vh - 110px);margin:0 auto;height:auto}
 [hidden]{display:none !important} /* closed windows and unshown images are hidden by attribute */
@@ -255,6 +270,12 @@ button{font:inherit;color:inherit}
   .grid2{grid-template-columns:minmax(0,1fr)}
   .card .thumb{aspect-ratio:21/9}
   .card .thumb b{font-size:34px}
+}
+
+/* phone: the project panel stacks */
+@media (max-width:640px){
+  .pgrid{grid-template-columns:minmax(0,1fr)}
+  .pinfo h2{font-size:38px}
 }
 
 /* phone: header + skills */

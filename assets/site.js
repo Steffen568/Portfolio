@@ -59,21 +59,26 @@
 
   // Windows over the scrim: one open at a time. Any .win-wrap works (the image window here, the project panel in unit 04).
   // Focus moves to CLOSE ✕ on open, Tab stays inside, and ✕, the scrim or Esc close it and hand focus back.
+  // An optional done() runs when the window closes, however it closes (the project panel uses it for the hash).
   var scrim = document.querySelector('[data-scrim]');
-  var openWin = null, opener = null;
-  function showWin(wrap, from) {
+  var openWin = null, opener = null, onClose = null;
+  function showWin(wrap, from, done) {
     if (openWin) closeWin();
     openWin = wrap;
     opener = from || null;
+    onClose = done || null;
     wrap.hidden = false;
     scrim.classList.add('on');
     wrap.querySelector('[data-close]').focus();
   }
   function closeWin() {
     if (!openWin) return;
+    var done = onClose;
     openWin.hidden = true;
     openWin = null;
+    onClose = null;
     scrim.classList.remove('on');
+    if (done) done();
     if (opener) opener.focus();
     opener = null;
   }
@@ -136,7 +141,11 @@
       var top = el('span', 'card-t');
       top.append(el('b', null, p.name), st);
       var chips = el('span', 'chips');
-      p.skills.forEach(function (x) { chips.appendChild(el('span', 'chip', label[x[0]])); });
+      p.skills.forEach(function (x) {
+        var c = el('span', 'chip', label[x[0]]);
+        c.dataset.skill = x[0];
+        chips.appendChild(c);
+      });
       var body = el('span', 'card-b');
       body.append(top, el('p', null, p.line), chips);
       b.append(el('span', 'go', 'OPEN ▸'), thumb, body);
@@ -151,10 +160,27 @@
   P.projects.forEach(function (p, i) { lineFor[p.id] = lines[i]; });
   var G = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&*+=<>/';
   var sc = null, iv = null, hov = null; // one card on at a time, as the design's hov
-  function off(card) {
-    card.classList.remove('on');
-    lineFor[card.dataset.card].classList.remove('on');
-    if (hov === card) hov = null;
+  var sk = '', pin = '', openId = null; // the active skill, the pinned skill, the project whose panel is open
+
+  // Every class that follows from the state, as the design's card() and LC: a card is on while hovered or open;
+  // with a skill active, cards that show it are .hit with that chip filled and the rest .dim; a line is on
+  // for its hovered or open card, or when its card shows the active skill. The definition line follows the skill.
+  var skDef = document.querySelector('.skl-def');
+  function paint() {
+    P.projects.forEach(function (p) {
+      var card = document.querySelector('[data-card="' + p.id + '"]');
+      var match = !!sk && p.skills.some(function (x) { return x[0] === sk; });
+      card.classList.toggle('on', hov === card || openId === p.id);
+      card.classList.toggle('hit', !!sk && match);
+      card.classList.toggle('dim', !!sk && !match);
+      card.querySelectorAll('.chip').forEach(function (c) { c.classList.toggle('on', c.dataset.skill === sk); });
+      lineFor[p.id].classList.toggle('on', hov === card || openId === p.id || match);
+    });
+    document.querySelectorAll('.skl .sk').forEach(function (b) { b.classList.toggle('on', b.dataset.skill === sk); });
+    var k = P.skills.find(function (x) { return x.id === sk; });
+    if (!k) { skDef.replaceChildren(el('b', null, '8 SKILLS ACROSS 6 PROJECTS')); return; }
+    var names = P.projects.filter(function (p) { return p.skills.some(function (x) { return x[0] === sk; }); }).map(function (p) { return p.name; });
+    skDef.replaceChildren(el('b', null, k.label + ':'), ' ' + k.def + ' Shown in ' + names.join(', ') + '.');
   }
   function scr(text, t0, now) {
     var p = (now - t0) / 380;
@@ -173,17 +199,15 @@
     var p = P.projects.find(function (x) { return x.id === card.dataset.card; });
     function enter() {
       if (hov === card) return;
-      if (hov) off(hov);
       hov = card;
-      card.classList.add('on');
-      lineFor[p.id].classList.add('on');
+      paint();
       if (still.matches) return;
       if (sc && sc.el !== card.querySelector('.card-t > b')) sc.el.textContent = sc.name;
       sc = { el: card.querySelector('.card-t > b'), name: p.name, t0: Date.now() };
       step();
       if (!iv) iv = setInterval(step, 33);
     }
-    function leave() { if (hov === card) off(card); }
+    function leave() { if (hov === card) { hov = null; paint(); } }
     card.addEventListener('pointerenter', enter);
     card.addEventListener('pointerleave', leave);
     card.addEventListener('focus', enter);
@@ -229,4 +253,92 @@
   setTimeout(measure, 60);
   setTimeout(measure, 700);
   try { if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure); } catch (e) {}
+
+  // Skills filter, the design's H.sk: pointing at or focusing a skill previews it; leaving shows the pinned skill
+  // (or none). A click pins it, a second click unpins it. A tap fires enter, leave, then click, so it pins too.
+  document.querySelectorAll('.skl .sk').forEach(function (b) {
+    var id = b.dataset.skill;
+    function on() { if (sk !== id) { sk = id; paint(); } }
+    function off() { if (sk !== pin) { sk = pin; paint(); } }
+    b.addEventListener('pointerenter', on);
+    b.addEventListener('pointerleave', off);
+    b.addEventListener('focus', on);
+    b.addEventListener('blur', off);
+    b.addEventListener('click', function () { pin = pin === id ? '' : id; sk = pin; paint(); });
+  });
+
+  // The project panel (the design's pj), in unit 02's window. One level deep: its only link is the demo.
+  var pjWin = document.querySelector('[data-win="pj"]');
+  function fill(p) {
+    var q = function (s) { return pjWin.querySelector(s); };
+    q('[role="dialog"]').setAttribute('aria-label', p.name);
+    q('.wh b').textContent = p.tkr + ' · ' + (p.group === 'web' ? 'WEBSITE' : 'SPORTS DATA TOOL');
+    q('.pthumb b').textContent = p.tkr;
+    q('.pinfo .st').className = 'st' + (p.wip ? ' wip' : '');
+    q('.pinfo .st').replaceChildren(el('i'), p.status);
+    q('.pinfo h2').textContent = p.name.toUpperCase();
+    q('.pinfo .one').textContent = p.line;
+    q('.pinfo p').textContent = p.what;
+    var proof = q('.proof');
+    proof.querySelectorAll('.pf').forEach(function (f) { f.remove(); });
+    p.skills.forEach(function (x) {
+      var f = el('div', 'pf');
+      f.append(el('span', 'chip on', label[x[0]]), el('span', null, x[1]));
+      proof.appendChild(f);
+    });
+    var old = q('.pinfo > .btn');
+    if (old) old.remove();
+    var go;
+    if (p.demo) {
+      go = el('a', 'btn green', 'OPEN THE WORKING DEMO ▸');
+      go.setAttribute('href', './' + p.path + 'index.html');
+      go.style.cssText = 'min-height: 52px; font-size: 13px';
+    } else {
+      go = el('button', 'btn', 'DEMO COMING SOON');
+      go.type = 'button';
+      go.disabled = true;
+      go.style.cssText = 'min-height: 52px';
+    }
+    q('.pinfo').appendChild(go);
+  }
+
+  // Hash: an open panel is named in the URL (#slate). Opening pushes one history entry, so Back closes it;
+  // ✕, the scrim and Esc step back over that entry. A page loaded with #id gets a hash-less entry put under it,
+  // so Back closes the panel instead of leaving the page. file:// may refuse history changes; then the hash is set plainly.
+  function byId(id) { return P.projects.find(function (p) { return p.id === id; }); }
+  function openPj(p) {
+    var card = document.querySelector('[data-card="' + p.id + '"]');
+    fill(p);
+    showWin(pjWin, card, function () {
+      openId = null;
+      paint();
+      if (location.hash !== '#' + p.id) return; // closed by Back, or by a hash naming another panel
+      if (history.state && history.state.pj === p.id) history.back();
+      else try { history.replaceState(null, '', location.pathname + location.search); } catch (e) { location.hash = ''; }
+    });
+    openId = p.id;
+    paint();
+  }
+  function sync() {
+    var p = byId(location.hash.slice(1));
+    if (p && openId !== p.id) openPj(p);
+    else if (!p && openId) closeWin();
+  }
+  document.querySelectorAll('.card').forEach(function (card) {
+    card.addEventListener('click', function () {
+      var p = byId(card.dataset.card);
+      openPj(p);
+      try { history.pushState({ pj: p.id }, '', '#' + p.id); } catch (e) { location.hash = p.id; }
+    });
+  });
+  window.addEventListener('hashchange', sync);
+  window.addEventListener('popstate', sync);
+  var first = byId(location.hash.slice(1));
+  if (first) {
+    try {
+      history.replaceState(null, '', location.pathname + location.search);
+      history.pushState({ pj: first.id }, '', '#' + first.id);
+    } catch (e) {}
+    openPj(first);
+  }
 })();

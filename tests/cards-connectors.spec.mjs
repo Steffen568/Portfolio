@@ -402,7 +402,9 @@ for (const width of [768, 390]) {
 }
 
 // Line 13: real buttons, 44 px, a click opens nothing yet; no sideways scroll at five widths.
-test('cards are 44 px+ buttons and a click opens nothing yet', async ({ page }) => {
+// Superseded by unit 04 (specs/04-skills-panel.md, "Supersedes"): a click used to open nothing; now it opens
+// only that card's panel, nothing else.
+test('cards are 44 px+ buttons and a click opens only that card\'s panel', async ({ page }) => {
   const errors = trackErrors(page);
   await page.goto('./');
   await settle(page);
@@ -410,11 +412,13 @@ test('cards are 44 px+ buttons and a click opens nothing yet', async ({ page }) 
     const c = page.locator('[data-card="' + id + '"]');
     expect((await c.boundingBox()).height).toBeGreaterThanOrEqual(44);
     await c.click();
+    expect(await page.evaluate(() => ({
+      open: [...document.querySelectorAll('.win-wrap:not([hidden])')].map((w) => w.dataset.win), hash: location.hash,
+      scrim: document.querySelector('[data-scrim]').classList.contains('on')
+    }))).toEqual({ open: ['pj'], hash: '#' + id, scrim: true });
+    await page.keyboard.press('Escape');
+    await expect(page.locator('.win-wrap:not([hidden])')).toHaveCount(0);
   }
-  expect(await page.evaluate(() => ({
-    open: document.querySelectorAll('.win-wrap:not([hidden])').length, hash: location.hash,
-    scrim: document.querySelector('[data-scrim]').classList.contains('on')
-  }))).toEqual({ open: 0, hash: '', scrim: false });
   expect(errors).toEqual([]);
 });
 

@@ -11,7 +11,7 @@ Ceiling: 60 lines (`scripts/verify.sh`). History goes to `docs/history/` the day
 |---|---|
 | Setup | CLAUDE.md, SCOPE.md, STATUS.md rewritten for the redesign; `specs/portfolio-site.md` and `specs/01-shell-header.md` written 2026-11-03. |
 | Units | **Units 01–05 Checked** 2026-11-03 (unit 05 found no page defect; no page file changed). At 1440×900 the header, the environment window and all four sports cards fit (cards end ~832 px). Detail: `docs/history/2026-11-03-unit-0*.md`. |
-| Demos | **All six copied in 2026-11-03** (unit 07), byte for byte from each project's `portfolio-demo` folder; every card and panel shows the real screenshot. Five demo buttons work; Optometry still says DEMO COMING SOON (your call, Proposed change 7). **Not pushed yet.** |
+| Demos | **All six copied in 2026-11-03** (unit 07), byte for byte from each project's `portfolio-demo` folder; every card and panel shows the real screenshot. Five demo buttons work; Optometry still says DEMO COMING SOON (your call, Proposed change 7). Pushed 2026-11-03. |
 | Publish | **Live 2026-11-03: https://steffen568.github.io/portfolio/** (repo `Steffen568/portfolio`, Pages from `main`, root). Live check at 390 and 1280: 200, six cards, no errors or missing files (`screenshots/06-publish/`). The five demo buttons lead to "not found" until the demos are copied in. |
 
 ## Units
@@ -33,7 +33,7 @@ Ceiling: 60 lines (`scripts/verify.sh`). History goes to `docs/history/` the day
 5. **Graphic labels on a phone (handoff "Known limit"): read them on a real phone.** At 390 px the graphic draws at 0.47 size: `CLAUDE.md` 9.4 px; `17 RULES`, `DONE CHECKLIST` and the hook names 7.5 px; BLOCKED / RULES / SHIPPED 6.6 px; pop-ups 7.7 px. If they can't be read, the approved phone-only fallback graphic is your call (frozen until you say). Not blocking unit 06.
 6. **Design as drawn, for your eye:** the graphic's small subtitles are 7–8.5 px at 768 and 1280 too, and the red "BLOCKED" pop's text just touches its box edges. Left as the design has them.
 7. **Optometry demo: turn it on?** Its demo is built and copied in (its screenshot shows), but the button still says DEMO COMING SOON and its line, description and proof are the old ones. Turning it on is your call; its `DEMO_CARD.md` has new wording if you want it.
-8. **One unit 06 test changed (Rule 13), your yes needed:** the secrets check matched compressed demo code (`password:!0`, `accessToken:null`), not secrets. It now skips those empties and catches a few forms it used to miss. Spec 07 line 8 has the detail; if you say no, it is reverted and the demos wait.
+8. **One unit 06 test changed (Rule 13): approved by Steffen 2026-11-03.** the secrets check matched compressed demo code (`password:!0`, `accessToken:null`), not secrets. It now skips those empties and catches a few forms it used to miss. Spec 07 line 8 has the detail; if you say no, it is reverted and the demos wait.
 
 ## Open inputs (SCOPE.md §5)
 Name, email and GitHub username supplied 2026-11-03 (STEFFEN GONZALEZ, sgonzalez568@gmail.com, Steffen568). Still open: Optometry demo on/off and its final copy (Proposed change 7).
@@ -44,5 +44,5 @@ Name, email and GitHub username supplied 2026-11-03 (STEFFEN GONZALEZ, sgonzalez
 None. `npm run verify` 155/155 (1.2 min, over the 60 s target).
 
 ## Next
-1. Your yes on Proposed change 8, then push (unit 07 is committed, not pushed); recheck the live site and each demo.
+1. Pushed 2026-11-03 with Steffen's yes; live recheck of the site and each demo.
 2. The stranger's-phone test on the live link (spec 06 line 10), and the graphic read on a real phone (Proposed change 5).

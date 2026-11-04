@@ -39,13 +39,15 @@ Ceiling: 60 lines (`scripts/verify.sh`). History goes to `docs/history/` the day
 10. **Scout DFS demo: team logos and jersey numbers added (Steffen, 2026-11-04)**, to match the real app: logos on the game chips, pool rows and lineup cards; a `#` column in the pool (3 players with no number in the real app either show —). Made in `SCOUT_DFS/portfolio-demo` (not committed there) and copied in, so the byte-for-byte check holds. Three logos (Liberty, Missouri State, Sam Houston) downloaded from collegefootballdata's CDN with Steffen's OK.
 11. **Scout Team demo replaced (Steffen, 2026-11-04):** copied in from CFB_HUB `4c24474`, Ohio State at Michigan, Nov 29, 2025 (finished 2025 season). The card's last sentence now reads "Demo: Ohio State at Michigan, Nov 29, 2025." (Steffen's OK; logged in `tests/copy-changes.mjs`, the rest of the card unchanged).
 
+12. **Cards load small pictures (Steffen, 2026-11-04: the page was very slow on a phone).** Cards now show a 960×600 top crop of each demo's screenshot (`assets/thumbs/*.webp`, 36–78 KB each): 4.2 MB → 0.33 MB, same crop on screen. The panel still shows the full screenshot. Two unit 07 checks now expect the small pictures, plus a new one capping a phone's picture download at 600 KB (Rule 13 change approved by Steffen). No loading animation (his call). Screenshots: `screenshots/2026-11-04-card-thumbs/`.
+
 ## Open inputs (SCOPE.md §5)
 Name, email and GitHub username supplied 2026-11-03 (STEFFEN GONZALEZ, sgonzalez568@gmail.com, Steffen568). Still open: Optometry demo on/off and its final copy (Proposed change 7).
 
 **Tests changed (Rule 13, for Steffen to see):** 2026-11-03, unit 01's header checks expected `[LAST NAME]` / `[YOUR EMAIL]`; they now expect the name and email Steffen supplied (the design file keeps its placeholders). Earlier: unit 01's scanline check compared the overlay with the full window; the reserved scrollbar strip can't be covered, so it now compares with a full-screen fixed layer. The page was not changed. **Unit 02, same cause:** its 390 px full-bleed check first compared with `clientWidth`, which counts that strip (390 vs a usable 375); it now uses the same fixed-layer measurement. Page unchanged. **Unit 03, superseded by unit 04:** its check "a card click opens nothing yet" was written to expire when the panel arrived; it now checks that each click opens only that card's panel (44 px and no-error checks kept).
 
 ## Failing checks
-None. `npm run verify` 155/155 on 2026-11-04 after the new Scout Team demo was copied in.
+None. `npm run verify` 156/156 on 2026-11-04 after the cards moved to small pictures (Proposed change 12).
 
 ## Next
 1. ~~Live recheck of the site and each demo~~ done 2026-11-03, all pass (not yet committed).

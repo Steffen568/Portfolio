@@ -123,14 +123,20 @@
     return e;
   }
   // The demo's screenshot, laid over the striped placeholder; if it can't load, the placeholder shows.
-  function shot(p, loading) {
+  // Cards take a small top crop (assets/thumbs/, made from the same screenshot) so a phone isn't
+  // downloading six full-page pictures; the panel takes the full screenshot.
+  function shot(p, loading, src) {
     var img = el('img');
     img.alt = '';
     img.loading = loading;
     img.onerror = function () { img.hidden = true; };
-    img.src = './' + p.path + 'screenshots/desktop.png';
+    img.src = src || './' + p.path + 'screenshots/desktop.png';
     return img;
   }
+  var THUMB = {
+    slate: './assets/thumbs/slatehub.webp', holy: './assets/thumbs/holy-cross.webp', dfs: './assets/thumbs/scout-dfs.webp',
+    scout: './assets/thumbs/scout-team.webp', wire: './assets/thumbs/the-wire.webp', optom: './assets/thumbs/eye-care.webp'
+  };
   var data = P.projects.filter(function (p) { return p.group === 'data'; });
   [
     [document.querySelector('.col-main:not(.col-r) .grid1'), data.slice(0, 2), '30px', 0],
@@ -144,7 +150,7 @@
       b.style.cssText = '--fx: ' + place[2] + '; animation-delay: ' + (0.5 + (place[3] + i) * 0.12).toFixed(2) + 's';
       b.setAttribute('aria-label', p.name + ': ' + p.line);
       var thumb = el('span', 'thumb');
-      thumb.append(el('b', null, p.tkr), el('span', null, 'SCREENSHOT PENDING'), shot(p, 'lazy'));
+      thumb.append(el('b', null, p.tkr), el('span', null, 'SCREENSHOT PENDING'), shot(p, 'lazy', THUMB[p.id]));
       var st = el('span', 'st' + (p.wip ? ' wip' : ''));
       st.append(el('i'), p.status);
       var top = el('span', 'card-t');

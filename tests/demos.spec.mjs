@@ -109,12 +109,33 @@ for (const width of [390, 1280]) {
       const img = page.locator(`.card[data-card="${d.id}"] .thumb img`);
       await img.scrollIntoViewIfNeeded();
       await expect.poll(() => img.evaluate((i) => i.complete && i.naturalWidth > 0), { message: d.name }).toBe(true);
-      expect(await img.evaluate(shot), d.name).toEqual({ src: `./demos/${d.name}/screenshots/desktop.png`, loaded: true, fit: 'cover', pos: '50% 0%', fills: true, visible: true });
+      expect(await img.evaluate(shot), d.name).toEqual({ src: `./assets/thumbs/${d.name}.webp`, loaded: true, fit: 'cover', pos: '50% 0%', fills: true, visible: true });
     }
     expect(errors).toEqual([]);
     await page.close();
   });
 }
+
+// Speed (Steffen, 2026-11-04): the cards loaded six full-page screenshots (4.3 MB) to show a strip of
+// each, and the page crawled on a phone. Scrolling the whole page at 390, with nothing opened, must
+// download under 600 KB of pictures; the full screenshots wait until a panel opens.
+test('a phone scrolling the page downloads under 600 KB of pictures', async ({ browser }) => {
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  const sizes = [];
+  page.on('response', async (r) => {
+    if (r.url().startsWith(BASE) && r.request().resourceType() === 'image') sizes.push({ url: r.url(), n: (await r.body()).length });
+  });
+  await page.goto(BASE, { waitUntil: 'networkidle' });
+  for (let y = 0; y < await page.evaluate(() => document.body.scrollHeight); y += 400) {
+    await page.evaluate((v) => window.scrollTo(0, v), y);
+    await page.waitForTimeout(50);
+  }
+  await page.waitForLoadState('networkidle');
+  const total = sizes.reduce((n, s) => n + s.n, 0);
+  expect(sizes.filter((s) => s.url.includes('/screenshots/')).map((s) => s.url), 'full screenshots loaded before any panel opened').toEqual([]);
+  expect(total, 'picture bytes').toBeLessThan(600 * 1024);
+  await page.close();
+});
 
 // Line 5: the panel shows the same picture at 16:10.
 test('every panel shows its demo screenshot at 16:10', async ({ browser }) => {
@@ -138,6 +159,7 @@ test('a screenshot that fails to load leaves the striped placeholder', async ({ 
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
   await page.route('**/screenshots/desktop.png', (r) => r.abort());
+  await page.route('**/assets/thumbs/*', (r) => r.abort());
   await page.goto(BASE);
   for (const d of DEMOS) {
     const card = page.locator(`.card[data-card="${d.id}"]`);

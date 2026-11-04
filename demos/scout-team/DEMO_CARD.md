@@ -39,7 +39,7 @@ The Game Center is the page for one game, in three tabs. OVERVIEW holds the game
 A web page for each game, team and player, plus national leaderboards. No picks, and no written takes.
 
 ## What this demo shows
-One game: Indiana at Michigan, played October 24, 2026 (Indiana won 13-6). It was saved once on November 1, 2026 and runs entirely in the browser from this folder.
+One game: Ohio State at Michigan, played November 29, 2025 (Ohio State won 27-9). It is from last season, so the figures come from the finished 2025 season and the records shown (12-2 and 9-4) are final. The box score's season averages are the regular season only, as the page says, so they leave out each team's bowl or playoff games. DraftKings prices start in 2026 in this project, so this game has no price column. It was saved once on November 3, 2026 and runs entirely in the browser from this folder.
 
 All three tabs work, including every expanding row, table and player stat sheet. Tapping a label shows its definition, and a short strip on each tab explains how to read it.
 
@@ -49,20 +49,27 @@ Layout: the real site has no phone layout, so this demo adds one. On narrow scre
 
 Changed from the real page, because each of these would be false or broken on this finished game:
 - Removed: the "Data basis" card and the "Flips to measured" strip, which say no games have been played.
-- Removed: the "Is the record real" card, whose saved figures stopped updating three games into the season.
+- Removed: the "Is the record real" card, whose saved records stop at different points (9-3 and 12-1) and disagree with the final 9-4 and 12-2 shown elsewhere.
 - Removed: a second "% vacated" figure that disagreed with the room's real one, and two table headers with no rows under them.
-- Removed: every player's class year, the column built from it, and the "true freshman" and "no snaps" labels, because the saved class years are wrong (most players read as freshmen). One player listed twice now appears once, and players marked as transfers from their own team read as returning, on every tab.
+- Removed: every player's class year, the column built from it, and the "true freshman" and "no snaps" labels, because the saved class years are wrong (most players read as freshmen).
 - Removed: a few wording errors, such as "3th" and a line calling one matchup "the clearest edge", and the empty cards in the Team tab's player rows.
-- Corrected: a column heading from 2025 to 2026, and the "no games played" label on the team panel, which now reads as preseason inputs.
-- Corrected: the Team tab's historical table now shows each team's own figures. It showed Michigan's for both teams.
-- Removed: the dashes in a player's drawer header, two portal counts that disagreed with the lists under them, and the expand arrow on rows with nothing to show. A footer saying every player was charted now says every player is listed.
+- Corrected: the "no games played" label on the team panel, and its "carried" grade labels, which now say the figures are from the 2025 season; signee notes that assumed no college snaps yet; a "0-star" rating for an unrated player; AP ranks that named week 1 for the final poll; bowl games listed as week 1 on the schedule; and a "portal rating" shown for players who never transferred.
+- Corrected: the Team tab's historical table now shows each team's own figures. It showed the home team's for both teams.
+- Removed: the dashes in a player's drawer header, two portal counts and a portal blue-chip figure that disagreed with the lists under them, and the expand arrow on rows with nothing to show. A footer saying every player was charted now says every player is listed.
 - Removed: four captions left over from the design mock-ups, which described figures this game does not have.
 - Corrected: a quarterback's missing star rating in the backfield table, unrated players' talent shown as 0, a carry share labelled as a room share, and the room-share definition, which counts receivers and tight ends separately.
 - Corrected: absent usage and room shares drawn as 0, which now show a dash, and a designed-carries count that repeated the total carries, now shown as absent.
-- Removed: three columns with no figure for any player (havoc, clutch, and drops in the game logs), and team figures in the historical table that answered a different question from their row.
+- Removed: the havoc column, which has no figure for any player, and team figures in the historical table that answered a different question from their row.
 - Corrected: transfers shown as unrated in the Matchup tables, which now show their latest rating.
-- Corrected: a quarterback success rate printed as 1% instead of 51%, room counts that counted one player twice, and two captions that promised details the rows do not show.
+- Corrected: a quarterback success rate printed as 1% instead of 61%, a schedule heading that said "12 GAMES" over 13 and 14 games, tooltips that printed "null" for a figure the data does not have, and two captions that promised details the rows do not show.
+- Removed: three team "grades" in the ledger that were really the share of last season's snaps still on the roster, and an opponent-adjusted column that repeated the grade beside it.
+- Removed: percentile labels that were not percentiles (game script's shading and tooltips, and a "PCTL" under some team shares that repeated the share), and the schedule's pace column, which showed each opponent's SP+ rating under a pace label, and its edge column, which compared each opponent with a stand-in figure because neither team has an overall rating saved.
+- Not corrected: the saved schedules carry no neutral-site flag, so the Big Ten title game and the two bowl games show H or A, from the side the data lists as home.
 - Corrected: the header caption, which called the offense and defense columns grades; they are efficiency percentiles.
 - Corrected: two rates in a running back's stat sheet that printed as 0%, and blank schedule figures that printed as 0.
 - Corrected: tooltips saying a team has "no charted play this season", and the definition of the returning figure.
+- Corrected: betting lines labelled a consensus of several books; they are one book's (ESPN Bet), and the labels now say so.
+- Corrected: a coach panel saying the program's own prior season applies; it shows the coach's figures here over a span of seasons, which reaches past this game for Ohio State. Tooltips that called 2025's carries, yards, shares and room grades "last season" now say 2025.
+- Corrected: the portal arrivals lists, which named 3 of Michigan's transfers and 4 of Ohio State's; every transfer the rosters flag is now listed (15 and 9), and the "who came in" table is rebuilt from the full list by the site's own rule.
+- Removed: Ohio State's "20% back" in the historical table, which disagreed with the 31% returning share shown beside it.
 - Turned off: the "Live" light in the top bar.

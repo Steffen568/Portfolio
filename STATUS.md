@@ -37,6 +37,7 @@ Ceiling: 60 lines (`scripts/verify.sh`). History goes to `docs/history/` the day
 9. **Wire card reworded, and its demo replaced (Steffen, 2026-11-03).** New demo from CFB_HUB `77c4996`: the Black Board added, slate DraftKings Main, Nov 7, 2026, twelve games. The line and description now follow Steffen's angle (a ready-made research report instead of spreadsheets and filters). The design file keeps its old words, so the three copy tests read `tests/copy-changes.mjs`, the one list of copy changes made after the design (a Rule 13 test change made at Steffen's request). Screenshots: `screenshots/2026-11-03-wire-copy/`.
 
 10. **Scout DFS demo: team logos and jersey numbers added (Steffen, 2026-11-04)**, to match the real app: logos on the game chips, pool rows and lineup cards; a `#` column in the pool (3 players with no number in the real app either show —). Made in `SCOUT_DFS/portfolio-demo` (not committed there) and copied in, so the byte-for-byte check holds. Three logos (Liberty, Missouri State, Sam Houston) downloaded from collegefootballdata's CDN with Steffen's OK.
+11. **Scout Team demo replaced (Steffen, 2026-11-04):** copied in from CFB_HUB `4c24474`, Ohio State at Michigan, Nov 29, 2025 (finished 2025 season). The card's last sentence now reads "Demo: Ohio State at Michigan, Nov 29, 2025." (Steffen's OK; logged in `tests/copy-changes.mjs`, the rest of the card unchanged).
 
 ## Open inputs (SCOPE.md §5)
 Name, email and GitHub username supplied 2026-11-03 (STEFFEN GONZALEZ, sgonzalez568@gmail.com, Steffen568). Still open: Optometry demo on/off and its final copy (Proposed change 7).
@@ -44,7 +45,7 @@ Name, email and GitHub username supplied 2026-11-03 (STEFFEN GONZALEZ, sgonzalez
 **Tests changed (Rule 13, for Steffen to see):** 2026-11-03, unit 01's header checks expected `[LAST NAME]` / `[YOUR EMAIL]`; they now expect the name and email Steffen supplied (the design file keeps its placeholders). Earlier: unit 01's scanline check compared the overlay with the full window; the reserved scrollbar strip can't be covered, so it now compares with a full-screen fixed layer. The page was not changed. **Unit 02, same cause:** its 390 px full-bleed check first compared with `clientWidth`, which counts that strip (390 vs a usable 375); it now uses the same fixed-layer measurement. Page unchanged. **Unit 03, superseded by unit 04:** its check "a card click opens nothing yet" was written to expire when the panel arrived; it now checks that each click opens only that card's panel (44 px and no-error checks kept).
 
 ## Failing checks
-`npm run verify` 154/155: `scout-team is a byte-for-byte copy` fails because the Scout Team demo is being rebuilt in CFB_HUB (not finished). The copy here is still the old, working demo; this clears when the new one is copied in.
+None. `npm run verify` 155/155 on 2026-11-04 after the new Scout Team demo was copied in.
 
 ## Next
 1. ~~Live recheck of the site and each demo~~ done 2026-11-03, all pass (not yet committed).

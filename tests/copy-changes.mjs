@@ -5,6 +5,10 @@ export const COPY_CHANGES = {
   wire: {
     line: 'Ready-made research, not endless spreadsheets.',
     what: 'Instead of endless spreadsheets and filters, it packages every charted play into a ready-made research report: the Black Board reads each game from the top down, a gap worksheet sets each offense against the defense it faces, and fact lines state the numbers. Demo: DraftKings Main, Nov 7, 2026, twelve games.'
+  },
+  // 2026-11-04, Steffen: the Scout Team demo was replaced (CFB_HUB 4c24474); only the demo sentence changes.
+  scout: {
+    what: 'Play-by-play, charting and prices turned into charts across Overview, Matchup and Team. No predictions. Demo: Ohio State at Michigan, Nov 29, 2025.'
   }
 };
 

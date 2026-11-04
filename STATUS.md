@@ -41,13 +41,15 @@ Ceiling: 60 lines (`scripts/verify.sh`). History goes to `docs/history/` the day
 
 12. **Cards load small pictures (Steffen, 2026-11-04: the page was very slow on a phone).** Cards now show a 960×600 top crop of each demo's screenshot (`assets/thumbs/*.webp`, 36–78 KB each): 4.2 MB → 0.33 MB, same crop on screen. The panel still shows the full screenshot. Two unit 07 checks now expect the small pictures, plus a new one capping a phone's picture download at 600 KB (Rule 13 change approved by Steffen). No loading animation (his call). Screenshots: `screenshots/2026-11-04-card-thumbs/`.
 
+13. **Fonts served from the site (Steffen, 2026-11-04: ~4 s first load on a phone was still too slow).** The design's two Google Fonts (Latin set, 77 KB, SIL Open Font License, files in `assets/fonts/`) now come from github.io, so a phone opens one connection instead of three and the first paint no longer waits on Google. Looks identical: pixel diff vs the Google-font screenshots changes only the clock and the graphic's moving loop. New check: the page loads nothing from another server. Tech stack line in CLAUDE.md and `specs/portfolio-site.md` updated. Screenshots: `screenshots/2026-11-04-self-hosted-fonts/`.
+
 ## Open inputs (SCOPE.md §5)
 Name, email and GitHub username supplied 2026-11-03 (STEFFEN GONZALEZ, sgonzalez568@gmail.com, Steffen568). Still open: Optometry demo on/off and its final copy (Proposed change 7).
 
 **Tests changed (Rule 13, for Steffen to see):** 2026-11-03, unit 01's header checks expected `[LAST NAME]` / `[YOUR EMAIL]`; they now expect the name and email Steffen supplied (the design file keeps its placeholders). Earlier: unit 01's scanline check compared the overlay with the full window; the reserved scrollbar strip can't be covered, so it now compares with a full-screen fixed layer. The page was not changed. **Unit 02, same cause:** its 390 px full-bleed check first compared with `clientWidth`, which counts that strip (390 vs a usable 375); it now uses the same fixed-layer measurement. Page unchanged. **Unit 03, superseded by unit 04:** its check "a card click opens nothing yet" was written to expire when the panel arrived; it now checks that each click opens only that card's panel (44 px and no-error checks kept).
 
 ## Failing checks
-None. `npm run verify` 156/156 on 2026-11-04 after the cards moved to small pictures (Proposed change 12).
+None. `npm run verify` 157/157 on 2026-11-04 after the fonts moved onto the site (Proposed change 13).
 
 ## Next
 1. ~~Live recheck of the site and each demo~~ done 2026-11-03, all pass (not yet committed).

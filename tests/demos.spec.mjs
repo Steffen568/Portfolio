@@ -137,6 +137,23 @@ test('a phone scrolling the page downloads under 600 KB of pictures', async ({ b
   await page.close();
 });
 
+// Speed (Steffen, 2026-11-04): each outside server costs a phone a fresh connection (often 0.5–1 s
+// on mobile data), and the Google Fonts stylesheet held up the first paint. Everything the page
+// loads, fonts included, comes from the site itself, and both fonts still load for real.
+test('the page loads nothing from any other server, and both fonts still load', async ({ browser }) => {
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  const outside = [];
+  page.on('request', (r) => { if (!/^(data|blob|about):/.test(r.url()) && !r.url().startsWith(BASE)) outside.push(r.url()); });
+  await page.goto(BASE, { waitUntil: 'networkidle' });
+  const loaded = await page.evaluate(async () => {
+    await document.fonts.ready;
+    return ['IBM Plex Mono', 'VT323'].map((fam) => [...document.fonts].some((f) => f.family.replace(/"/g, '') === fam && f.status === 'loaded'));
+  });
+  expect(outside).toEqual([]);
+  expect(loaded).toEqual([true, true]);
+  await page.close();
+});
+
 // Line 5: the panel shows the same picture at 16:10.
 test('every panel shows its demo screenshot at 16:10', async ({ browser }) => {
   const { page, errors } = await open(browser, 1280);

@@ -32,7 +32,7 @@ Data stays in `data.js`, not JSON: a JSON file can't be fetched when `index.html
 
 - Retro-futuristic terminal: amber on near-black, faint CRT scanlines (`.crt`, never catches clicks), no moving background.
 - Dark only; `color-scheme: dark`; the phone's light setting changes nothing.
-- Fonts: IBM Plex Mono (body, labels), VT323 (name, big numbers), from Google Fonts as in the design.
+- Fonts: IBM Plex Mono (body, labels), VT323 (name, big numbers): the design's Google Fonts, self-hosted in `assets/fonts/` (STATUS change 13).
 - Tokens: `--acc #ffa028`, `--yel #f5c518`, `--org #ff6b2c`, `--grn #7cc46a`, `--red #e5534b`, `--bg #050403`, `--pan #0b0906`, `--ln #2a241b`, `--ln2 #3d352a`, `--tx #f0e9dc`, `--mu #b3a892`, `--dim #8f8470`.
 - Content max width 1440 px, centered, 24 px side padding (14 px at 640 px and below). Corners 3–6 px.
 - Copy is final: descriptive, plain. No instructions to the visitor, no "this site", "environment" never "framework".

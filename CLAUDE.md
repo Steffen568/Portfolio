@@ -27,7 +27,7 @@ One static page that hosts Steffen's portfolio: a header (the 5-second read), a 
 ## Tech Stack (decided; change it only with a STATUS.md entry saying why)
 
 - **Plain HTML, CSS and JavaScript.** No framework, no bundler, no build step. `index.html`, `assets/site.css`, `assets/site.js`, `assets/data.js` (`window.PORTFOLIO = { skills, projects }`; data in JS, not JSON, so `file://` works).
-- **Fonts:** IBM Plex Mono and VT323 from Google Fonts, as in the design.
+- **Fonts:** IBM Plex Mono and VT323, the design's Google Fonts, self-hosted in `assets/fonts/` (Latin set; `@font-face` inline in `index.html`). The page loads nothing from another server (STATUS change 13).
 - **The URL hash** only names an open project panel (`#slatehub`); it never switches views.
 - **Tests:** Playwright (Chromium) in `tests/`, run against `scripts/serve.mjs` (a tiny local file server). Dev-only; nothing in `node_modules/` ships.
 - **Hosting:** GitHub Pages, branch `main`, root.

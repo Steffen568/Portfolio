@@ -36,6 +36,8 @@ Ceiling: 60 lines (`scripts/verify.sh`). History goes to `docs/history/` the day
 8. **One unit 06 test changed (Rule 13): approved by Steffen 2026-11-03.** the secrets check matched compressed demo code (`password:!0`, `accessToken:null`), not secrets. It now skips those empties and catches a few forms it used to miss. Spec 07 line 8 has the detail; if you say no, it is reverted and the demos wait.
 9. **Wire card reworded, and its demo replaced (Steffen, 2026-11-03).** New demo from CFB_HUB `77c4996`: the Black Board added, slate DraftKings Main, Nov 7, 2026, twelve games. The line and description now follow Steffen's angle (a ready-made research report instead of spreadsheets and filters). The design file keeps its old words, so the three copy tests read `tests/copy-changes.mjs`, the one list of copy changes made after the design (a Rule 13 test change made at Steffen's request). Screenshots: `screenshots/2026-11-03-wire-copy/`.
 
+10. **Scout DFS demo: team logos and jersey numbers added (Steffen, 2026-11-04)**, to match the real app: logos on the game chips, pool rows and lineup cards; a `#` column in the pool (3 players with no number in the real app either show —). Made in `SCOUT_DFS/portfolio-demo` (not committed there) and copied in, so the byte-for-byte check holds. Three logos (Liberty, Missouri State, Sam Houston) downloaded from collegefootballdata's CDN with Steffen's OK.
+
 ## Open inputs (SCOPE.md §5)
 Name, email and GitHub username supplied 2026-11-03 (STEFFEN GONZALEZ, sgonzalez568@gmail.com, Steffen568). Still open: Optometry demo on/off and its final copy (Proposed change 7).
 

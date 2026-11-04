@@ -63,6 +63,7 @@ h1, h2, h3 { font: inherit; margin: 0; }
 .chip-game { flex: none; min-height: 44px; padding: 4px 10px; background: var(--raised); border: 1px solid var(--line); text-align: left; white-space: nowrap; }
 .chip-game.on { background: var(--blue); border-color: var(--blue); color: var(--blue-ink); }
 .chip-game.on .dim, .chip-game.on .c-yellow { color: var(--blue-ink); }
+.tlogo { width: 18px; height: 18px; object-fit: contain; vertical-align: -4px; margin-right: 6px; }
 .chip-game small { display: block; font-size: 12px; color: var(--dim); }
 .chip-game.on small { color: var(--blue-ink); }
 

@@ -24,6 +24,11 @@
   function players() { return S.doc.players; }
   function byId(id) { return S.index[id]; }
   function pct(v) { var x = parseFloat(v); return isNaN(x) ? null : Math.min(100, Math.max(0, x)); }
+  // Team logos, the same files the real terminal shows (collegefootballdata team ids), copied into ./assets/logos.
+  var LOGO = { ARST: 2032, LIB: 2335, MOST: 2623, SALA: 6, SHSU: 2534, USF: 58, UTSA: 2636, WKU: 98 };
+  function logo(team) {
+    return LOGO[team] ? '<img class="tlogo" src="./assets/logos/' + LOGO[team] + '.png" alt="" width="18" height="18">' : '';
+  }
 
   /* ---------- what the solver is asked ---------- */
   function settings() {
@@ -107,8 +112,8 @@
     return '<div class="games">' + chip('ALL', 'ALL GAMES', S.doc.games.length + ' ON SLATE') +
       S.doc.games.map(function (g) {
         var t = implied(g);
-        return chip(g.id, esc(g.away) + ' <span class="c-yellow">' + t.away.toFixed(1) + '</span> @ ' +
-          esc(g.home) + ' <span class="c-yellow">' + t.home.toFixed(1) + '</span>',
+        return chip(g.id, logo(g.away) + esc(g.away) + ' <span class="c-yellow">' + t.away.toFixed(1) + '</span> @ ' +
+          logo(g.home) + esc(g.home) + ' <span class="c-yellow">'+ t.home.toFixed(1) + '</span>',
           'O/U ' + g.total + ' · ' + esc(g.start) + ' ET');
       }).join('') + '</div>';
   }
@@ -152,7 +157,7 @@
   function poolTable() {
     var rows = poolRows();
     return '<table class="pool"><thead><tr><th class="l">LCK</th><th class="l">XCL</th><th>MAX%</th><th>MIN%</th>' +
-      '<th class="l">PLAYER</th><th class="l">POS</th><th class="l">TEAM</th><th>SALARY</th><th>PROJ</th><th>VAL</th><th>FLR</th><th>CEIL</th><th>OWN%</th></tr></thead><tbody>' +
+      '<th class="l">PLAYER</th><th>#</th><th class="l">POS</th><th class="l">TEAM</th><th>SALARY</th><th>PROJ</th><th>VAL</th><th>FLR</th><th>CEIL</th><th>OWN%</th></tr></thead><tbody>' +
       rows.map(function (p) {
         var gone = !S.solvable[p.id];
         var off = gone ? ' aria-disabled="true" title="' + esc(p.drop || 'outside the top ' + B.RULES.poolSize + ' this demo solves') + '"' : '';
@@ -161,7 +166,8 @@
           '<td class="l"><button class="tog xcl' + (S.excluded[p.id] ? ' on' : '') + '" data-a="exclude" data-i="' + p.id + '" aria-pressed="' + !!S.excluded[p.id] + '" aria-label="Exclude ' + esc(p.name) + '"' + off + '>X</button></td>' +
           '<td><input inputmode="numeric" data-in="cap" data-i="' + p.id + '" placeholder="—" aria-label="Max exposure percent for ' + esc(p.name) + '" value="' + esc(S.caps[p.id] == null ? '' : S.caps[p.id]) + '"' + (gone ? ' readonly' + off : '') + '></td>' +
           '<td><input inputmode="numeric" data-in="min" data-i="' + p.id + '" placeholder="—" aria-label="Min exposure percent for ' + esc(p.name) + '" value="' + esc(S.mins[p.id] == null ? '' : S.mins[p.id]) + '"' + (gone ? ' readonly' + off : '') + '></td>' +
-          '<td class="l">' + esc(p.name) + (p.status ? ' <span class="status-flag">' + esc(p.status) + '</span>' : '') + '</td>' +
+          '<td class="l">' + logo(p.team) + esc(p.name) + (p.status ? ' <span class="status-flag">' + esc(p.status) + '</span>' : '') + '</td>' +
+          '<td class="dim">' + (p.jersey == null ? '—' : esc(p.jersey)) + '</td>' +
           '<td class="l">' + esc(p.pos) + '</td><td class="l">' + esc(p.team) + '</td>' +
           '<td>' + k(p.sal) + '</td><td class="' + (gone ? '' : 'c-green') + '">' + num(p.proj, 1) + '</td>' +
           '<td>' + (p.proj > 0 ? (p.proj / (p.sal / 1000)).toFixed(2) : '—') + '</td>' +
@@ -255,7 +261,7 @@
       lu.seats.map(function (s) {
         var p = byId(s.id);
         return '<div class="seat"><span class="slot">' + (SLOT_SHORT[s.slot] || s.slot) + '</span>' +
-          '<span class="who">' + esc(p.name) + '<small>' + esc(p.team) + '</small></span>' +
+          '<span class="who">' + logo(p.team) + esc(p.name) + '<small>' + esc(p.team) + '</small></span>' +
           '<span>' + k(p.sal) + '</span><span class="pts">' + num(p.proj, 1) + '</span><span>' + num(p.own, 1) + '</span></div>';
       }).join('') +
       '<div class="card-foot"><b>' + lu.proj.toFixed(1) + ' PTS</b><span>' + lu.own.toFixed(1) + '% OWN</span></div></article>';

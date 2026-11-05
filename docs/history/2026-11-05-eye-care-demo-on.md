@@ -12,3 +12,5 @@
 
 **Seen, not changed:** the footer says every demo runs "on real data"; this one runs on stand-in facts. The card's proof line still says "three-stop tour".
 **Rule 15 review 1 (fresh agent): zero lines.**
+
+**Later the same day (Steffen: "do all the above").** Optometry card copy now follows `DEMO_CARD.md`: line "A concept redesign where an eye-care patient says why they came and gets a short route.", a new description, and the proof "Asks why you came, then a short route: the doctor, the plan, the cost, the booking." Footer now reads `EVERY DEMO IS A FROZEN SNAPSHOT · FORMS AND OUTSIDE LINKS OFF`. Both are in `tests/copy-changes.mjs` (the footer check now reads `FOOTER` there); 4 copy checks failed before the change, verify 157/157 after. Screenshots: `screenshots/2026-11-05-optom-copy/`. The leftover `portfolio-demo/` folder and zip were not deleted: the Rule 16 hook blocks folder deletes from a session.

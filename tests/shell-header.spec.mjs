@@ -1,6 +1,6 @@
 // Unit 01 — Shell + header. Each test names the spec line it guards (specs/01-shell-header.md).
 import { test, expect } from '@playwright/test';
-import { withCopyChanges } from './copy-changes.mjs';
+import { withCopyChanges, FOOTER } from './copy-changes.mjs';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -103,7 +103,7 @@ test('header and footer copy match the design word for word', async ({ page }) =
   await expect(page.locator('.hd-r .em')).toHaveCSS('user-select', 'all');
   await expect(page.locator('.hd-r .btn')).toHaveText('COPY EMAIL');
   const ft = page.locator('footer.ft > span');
-  await expect(ft).toHaveText([designText('<footer class="ft"><span>', '</span>'), 'sgonzalez568@gmail.com']);
+  await expect(ft).toHaveText([FOOTER, 'sgonzalez568@gmail.com']); // changed after the design: tests/copy-changes.mjs
 });
 
 // Line 5: the clock is Chicago time, HH:MM on a 00–23 hour, refreshed every 30 s.

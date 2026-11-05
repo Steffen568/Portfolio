@@ -49,7 +49,7 @@ Data stays in `data.js`, not JSON: a JSON file can't be fetched when `index.html
 
 **Panel.** Scrim + CRT window: `TICKER · WEBSITE|SPORTS DATA TOOL` and CLOSE ✕; screenshot 16:10; status, name (VT323), line, description, SKILLS SHOWN (chip + proof line per skill), OPEN THE WORKING DEMO ▸ (green, 52 px, relative link) or DEMO COMING SOON (disabled, Optometry). ✕, scrim, Esc and Back close it; focus returns to the card.
 
-**Footer.** `EVERY DEMO IS A FROZEN SNAPSHOT ON REAL DATA · FORMS AND OUTSIDE LINKS OFF` left, the email right.
+**Footer.** `EVERY DEMO IS A FROZEN SNAPSHOT · FORMS AND OUTSIDE LINKS OFF` left (Steffen, 2026-11-05: "ON REAL DATA" dropped; the design keeps it), the email right.
 
 ## Skills
 

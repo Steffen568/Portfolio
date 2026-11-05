@@ -191,11 +191,15 @@ test('a screenshot that fails to load leaves the striped placeholder', async ({ 
   await page.close();
 });
 
-// Line 7: Optometry's button stays DEMO COMING SOON.
-test('Optometry still says DEMO COMING SOON', async ({ browser }) => {
+// Line 7: Optometry's demo is on (Steffen, 2026-11-05): its panel opens its working demo, and nothing says COMING SOON.
+test('Optometry opens its working demo', async ({ browser }) => {
   const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
   await page.goto(BASE + '#optom');
-  await expect(page.getByRole('button', { name: 'DEMO COMING SOON' })).toBeDisabled();
-  await expect(page.getByRole('link', { name: 'OPEN THE WORKING DEMO ▸' })).toHaveCount(0);
+  await expect(page.getByRole('button', { name: 'DEMO COMING SOON' })).toHaveCount(0);
+  const link = page.getByRole('link', { name: 'OPEN THE WORKING DEMO ▸' });
+  await expect(link).toHaveAttribute('href', './demos/eye-care/index.html');
+  await link.click();
+  await expect(page).toHaveURL(BASE + 'demos/eye-care/index.html');
+  await expect(page).toHaveTitle(/name withheld/);
   await page.close();
 });

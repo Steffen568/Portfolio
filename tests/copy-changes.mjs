@@ -9,6 +9,10 @@ export const COPY_CHANGES = {
   // 2026-11-04, Steffen: the Scout Team demo was replaced (CFB_HUB 4c24474); only the demo sentence changes.
   scout: {
     what: 'Play-by-play, charting and prices turned into charts across Overview, Matchup and Team. No predictions. Demo: Ohio State at Michigan, Nov 29, 2025.'
+  },
+  // 2026-11-05, Steffen: the Optometry demo is added to the portfolio (AEC_ReDesign 960401b); its button turns on, copy unchanged.
+  optom: {
+    demo: true
   }
 };
 

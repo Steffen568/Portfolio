@@ -34,9 +34,9 @@ Web pages in English and Spanish. The site does not collect or store anything fr
 
 ## What this demo shows
 
-A frozen copy of the concept, taken November 1, 2026, running entirely from this folder with the name and details of the practice removed.
+A frozen copy of the concept, taken November 5, 2026, running entirely from this folder with the name and details of the practice removed.
 
-- **What works:** the welcome, the "why are you visiting" tiles, all six routes to their end, the insurance plan check, the traditional full-site home, and the Spanish tour.
+- **What works:** the welcome, the "why are you visiting" tiles, all six routes to their end, the insurance plan check, the traditional full-site home (the office in five tiles, then five chapters), the dry-eye clinic page (a self-check that stays on the screen, a card for each in-office treatment, costs and questions), and Spanish versions of all three.
 - **What's turned off:** phone, directions and frame-shop links, links to pages not built yet, and the booking scheduler's day and time buttons. Each says so when tapped.
-- **What's swapped out:** doctors are "Dr. A" and "Dr. B". Photos are labeled placeholders. Address, phone, hours, reviews and awards are withheld. Wording that names something real was rewritten for this demo.
+- **What's swapped out:** doctors are "Dr. A" and "Dr. B", with their careers withheld. Photos are labeled placeholders. Address, phone, hours, reviews, awards and treatment device brand names are withheld. Wording that names something real, and the practice's own sentences, were rewritten for this demo.
 - **What's still open on purpose:** the `[NEEDED]` and `[CONFIRM]` tags are the concept's way of showing what only the practice can supply. The Spanish is a draft under review, and it says so on the page.

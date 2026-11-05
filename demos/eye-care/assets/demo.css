@@ -25,6 +25,14 @@ html {
   display: inline !important;
 }
 
+/* The small round avatar shows the doctor's letter (spec: Photos). */
+.slot.sm[role="img"] {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 26px;
+  line-height: 1;
+  color: #c9a15b;
+}
+
 [data-demo-off],
 [data-demo-only] {
   cursor: not-allowed !important;

@@ -274,8 +274,8 @@ test('the graphic\'s labels at 390 are never smaller than measured', async ({ br
 });
 
 // Line 14: one level deep. With each panel open, the only link on the page is that project's demo,
-// relative, resolving under /portfolio/, in the same tab; Optometry has none.
-test('the only links are the five demo buttons, relative and under /portfolio/', async ({ browser }) => {
+// relative, resolving under /portfolio/, in the same tab (all six since 2026-11-05).
+test('the only links are the six demo buttons, relative and under /portfolio/', async ({ browser }) => {
   const { page } = await open(browser, 1280);
   const links = () => page.evaluate(() => [...document.querySelectorAll('a, [href], [onclick], form')].map((a) => ({
     inPanel: !!a.closest('[data-win="pj"] .pinfo'),
@@ -290,9 +290,7 @@ test('the only links are the five demo buttons, relative and under /portfolio/',
     await page.locator(`[data-card="${id}"]`).click();
     await expect(page.locator('[data-win="pj"]')).toBeVisible();
     const l = await links();
-    if (id === 'optom') {
-      expect(l, id).toEqual([]);
-    } else {
+    {
       expect(l.length, id).toBe(1);
       expect(l[0].inPanel, id).toBe(true);
       expect(l[0].tag, id).toBe('a');
@@ -304,6 +302,6 @@ test('the only links are the five demo buttons, relative and under /portfolio/',
     await page.keyboard.press('Escape');
     await expect(page.locator('[data-win="pj"]')).toBeHidden();
   }
-  expect(new Set(demos).size).toBe(5);
+  expect(new Set(demos).size).toBe(6);
   await page.close();
 });

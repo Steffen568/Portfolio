@@ -12,8 +12,11 @@ export const COPY_CHANGES = {
   },
   // 2026-11-05, Steffen: the Optometry demo is added to the portfolio (AEC_ReDesign 960401b); its button turns on.
   // Same day, Steffen: its copy follows the demo's DEMO_CARD.md (six short routes, not a three-stop tour).
+  // Same day, Steffen: with the AI pictures back in the demo (AEC_ReDesign bcca2bd), its status reads WORKING DEMO, not IN PROGRESS.
   optom: {
     demo: true,
+    status: 'WORKING DEMO',
+    wip: false,
     skills: [['web', 'Asks why you came, then a short route: the doctor, the plan, the cost, the booking.']],
     line: 'A concept redesign where an eye-care patient says why they came and gets a short route.',
     what: 'Instead of one home page for everyone, each visitor says why they came and gets a short route: who they\'ll see, whether their plan is taken, what it costs, how to book. Also in Spanish. Practice name withheld.'

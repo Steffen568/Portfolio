@@ -136,8 +136,10 @@ test('each card: button, name, status, line, ticker, placeholder and chips from 
     });
     expect(r.chips.length).toBeLessThanOrEqual(4);
   }
-  const wip = await page.locator('[data-card="optom"] .st').evaluate((e) => getComputedStyle(e).color);
-  expect(wip).toBe('rgb(255, 107, 44)');
+  // Optometry was the one in-progress card (orange); since 2026-11-05 (Steffen) it is a working demo, colored like the others.
+  const color = (id) => page.locator(`[data-card="${id}"] .st`).evaluate((e) => getComputedStyle(e).color);
+  expect(await color('optom')).not.toBe('rgb(255, 107, 44)');
+  expect(await color('optom')).toBe(await color('slate'));
 });
 
 for (const width of [1100, 1280, 1440]) {
